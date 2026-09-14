@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="../assets/img/selfdriven-you-logo-round-4colour-wheel.png">
+<link rel="shortcut icon" href="../assets/img/selfdriven-you-logo-round-4colour-blend.png">
+<link rel="apple-touch-icon" href="../assets/img/selfdriven-you-logo-round-4colour-blend.png" />
+<title>selfdriven.you · Have a go.</title>
+<meta name="description" content="Three weeks. A phone, a laptop, an email, and a thing that types back. You get paid for your time. Nothing on this page is a test.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+<!--
+  PETE: three things to fill in before you send this to Russ.
+    1. The show and tell date   -> search for  PETE-DATE
+    2. The weekly payday        -> search for  PETE-PAYDAY   (it says Friday)
+    3. Check the amount         -> search for  PETE-AMOUNT   (it says $250)
+  Everything else is ready. Ticks save in Russ's browser on whichever device he uses.
+  Reading controls: "Bigger text" and "Read it to me" are in the hero and in every section head.
+-->
+
+<!-- inline icon library -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ic-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
+  <symbol id="ic-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol>
+  <symbol id="ic-hammer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></symbol>
+  <symbol id="ic-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></symbol>
+  <symbol id="ic-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></symbol>
+  <symbol id="ic-laptop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></symbol>
+  <symbol id="ic-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+  <symbol id="ic-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="ic-branch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></symbol>
+  <symbol id="ic-buoy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/><circle cx="12" cy="12" r="4"/></symbol>
+  <symbol id="ic-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></symbol>
+  <symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+  <symbol id="ic-print" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></symbol>
+  <symbol id="ic-shirt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></symbol>
+  <symbol id="ic-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></symbol>
+  <symbol id="ic-cash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></symbol>
+  <symbol id="ic-seed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-8"/><path d="M12 14c0-4 3-7 8-7 0 5-3 8-8 8Z"/><path d="M12 16c0-3-2.5-5.5-6-5.5 0 3.6 2.4 6 6 6Z"/></symbol>
+  <symbol id="ic-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></symbol>
+  <symbol id="ic-undo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol>
+  <symbol id="ic-speaker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.7 6.6 8.3H3v7.4h3.6L11 19.3z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></symbol>
+  <symbol id="ic-stop" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="6" y="6" width="12" height="12" rx="2"/></symbol>
+  <symbol id="ic-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5h16v2"/><path d="M9 20h6"/><path d="M12 5v15"/></symbol>
+  <symbol id="ic-video" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></symbol>
+</svg>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --bg:#09090f; --surface:#111118; --surface2:#18181f;
+  --border:rgba(255,255,255,0.08);
+  --text:#f0eeff; --muted:#7e7a9a; --muted2:#3d3a55;
+  --curious:#f5c842; --caring:#ff5f7e; --constructive:#00e5a0; --chill:#7b6cff;
+  --chill-bright:#9b8fff;
+  --curious-dim:rgba(245,200,66,0.13); --caring-dim:rgba(255,95,126,0.13);
+  --constructive-dim:rgba(0,229,160,0.13); --chill-dim:rgba(123,108,255,0.13);
+  --pill:999px;
+  --fs:16px; --lh:1.6; --ls:0em; --ws:normal;
+}
+
+html{scroll-behavior:smooth}
+html,body{background:#09090f !important;color:#f0eeff}
+body{
+  font-family:'DM Sans',sans-serif; background:#09090f; color:var(--text);
+  overflow-x:hidden; cursor:none; min-height:100vh;
+  font-size:var(--fs); line-height:var(--lh); letter-spacing:var(--ls); word-spacing:var(--ws);
+}
+a{cursor:none}
+button{cursor:none;font-family:inherit}
+label{cursor:none}
+::selection{background:var(--caring);color:#09090f}
+
+/* bigger-text mode: roomier lines, calmer background, no strike-through */
+body.easy{--fs:18px; --lh:1.85; --ls:.012em; --ws:.09em}
+body.easy .gblob{animation:none;opacity:.28;filter:blur(120px)}
+body.easy .reveal{opacity:1 !important;transform:none !important;transition:none}
+body.easy .tick input:checked ~ .tick-do{text-decoration:none;opacity:.62}
+body.easy .mode-line,body.easy .tick-do,body.easy .goal-body p,body.easy .tip p,body.easy .step div{max-width:62ch}
+body.easy .tick-do small,body.easy .step div small{font-size:.92em}
+
+/* custom cursor */
+.cursor-dot{position:fixed;top:0;left:0;width:8px;height:8px;border-radius:50%;
+  background:var(--caring);pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);transition:transform .12s ease,background .2s}
+.cursor-ring{position:fixed;top:0;left:0;width:34px;height:34px;border-radius:50%;
+  border:1.5px solid rgba(240,238,255,.3);pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);transition:transform .18s ease,border-color .2s,width .2s,height .2s}
+@media (hover:none){ body{cursor:auto} a,button,label{cursor:auto} .cursor-dot,.cursor-ring{display:none} }
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 48px;background:rgba(9,9,15,.72);backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-logo{display:inline-flex;align-items:center;gap:0;
+  font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:19px;
+  color:var(--text);text-decoration:none;letter-spacing:-.04em}
+.nav-logo .markdots{display:inline-flex;gap:3px;flex-shrink:0;margin-right:4px}
+.nav-logo .markdots i{width:7px;height:7px;border-radius:50%;display:block}
+.nav-logo .markdots i:nth-child(1){background:var(--curious)}
+.nav-logo .markdots i:nth-child(2){background:var(--caring)}
+.nav-logo .markdots i:nth-child(3){background:var(--constructive)}
+.nav-logo .markdots i:nth-child(4){background:var(--chill)}
+@keyframes dotWave{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+.nav-logo .markdots.wave i{animation:dotWave .7s ease}
+.nav-logo .markdots.wave i:nth-child(1){animation-delay:0s}
+.nav-logo .markdots.wave i:nth-child(2){animation-delay:.12s}
+.nav-logo .markdots.wave i:nth-child(3){animation-delay:.24s}
+.nav-logo .markdots.wave i:nth-child(4){animation-delay:.36s}
+@media (prefers-reduced-motion:reduce){.nav-logo .markdots.wave i{animation:none}}
+.nav-logo em{font-style:normal;color:var(--caring)}
+.nav-links{display:flex;gap:26px;list-style:none;align-items:center}
+.nav-links a{font-size:14px;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.back{display:inline-flex;align-items:center;gap:6px}
+.nav-links a.back svg{width:15px;height:15px}
+
+/* hero */
+.hero{position:relative;padding:150px 0 84px;text-align:center;overflow:hidden}
+.gblob{position:absolute;border-radius:50%;filter:blur(95px);opacity:.5;z-index:0}
+.gb1{width:520px;height:520px;background:var(--caring);top:-160px;left:-160px;animation:gb 15s ease-in-out infinite}
+.gb2{width:440px;height:440px;background:var(--curious);top:40px;right:-130px;animation:gb 19s ease-in-out infinite reverse}
+.gb3{width:360px;height:360px;background:var(--constructive);bottom:-70px;left:18%;animation:gb 23s ease-in-out infinite 3s}
+.gb4{width:320px;height:320px;background:var(--chill);bottom:10px;right:12%;animation:gb 17s ease-in-out infinite 8s}
+@keyframes gb{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(34px,-26px) scale(1.08)}70%{transform:translate(-22px,30px) scale(.93)}}
+@media (prefers-reduced-motion:reduce){.gblob{animation:none}}
+.hero-inner{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:0 32px}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(9,9,15,.55);
+  border:1px solid rgba(255,255,255,.22);border-radius:var(--pill);padding:8px 18px;
+  font-size:12px;font-weight:500;color:rgba(240,238,255,.7);letter-spacing:.08em;text-transform:uppercase;margin-bottom:26px;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.hero-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--caring);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
+@media (prefers-reduced-motion:reduce){.hero-pill .dot{animation:none}}
+.hero h1{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(46px,8vw,96px);
+  font-weight:800;letter-spacing:-.04em;line-height:1.02;margin-bottom:24px;padding-bottom:.06em}
+.hero h1 .accent{color:var(--caring)}
+.hero-sub{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:600px;
+  margin:0 auto 26px;line-height:1.65}
+.hero-sub strong{color:var(--text);font-weight:600}
+
+/* reading controls */
+.readbar{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:34px}
+.rb{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:var(--pill);
+  border:1.5px solid var(--border);background:rgba(9,9,15,.55);color:var(--muted);
+  font-family:'Bricolage Grotesque',sans-serif;font-size:13.5px;font-weight:600;transition:all .2s;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.rb svg{width:15px;height:15px}
+.rb:hover{color:var(--text);border-color:rgba(255,255,255,.3)}
+.rb[aria-pressed="true"]{background:var(--chill-dim);border-color:rgba(123,108,255,.55);color:var(--chill-bright)}
+.rb:focus-visible{outline:2px solid var(--text);outline-offset:3px}
+
+/* progress card */
+.progress{position:relative;max-width:560px;margin:0 auto;
+  background:rgba(9,9,15,.62);border:1px solid rgba(255,255,255,.14);border-radius:26px;
+  padding:30px 30px 26px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  box-shadow:0 24px 70px rgba(0,0,0,.5);text-align:left}
+.pg-label{display:flex;align-items:center;gap:9px;font-family:'Bricolage Grotesque',sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--caring);margin-bottom:16px}
+.pg-label svg{width:15px;height:15px}
+.pg-count{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(24px,4.6vw,32px);
+  font-weight:700;letter-spacing:-.025em;line-height:1.2;color:var(--text)}
+.pg-count b{color:var(--caring);font-weight:800}
+.pg-bar{height:8px;border-radius:999px;background:rgba(255,255,255,.1);margin:18px 0 14px;overflow:hidden}
+.pg-fill{height:100%;width:0;border-radius:999px;
+  background:linear-gradient(90deg,var(--curious),var(--caring),var(--constructive),var(--chill));
+  transition:width .5s cubic-bezier(.22,1,.36,1)}
+.pg-note{font-size:13.5px;color:var(--muted);line-height:1.6}
+.pg-note strong{color:var(--text)}
+.pg-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.pg-btn{flex:1 1 auto;padding:13px 20px;border:none;border-radius:var(--pill);
+  background:var(--caring);color:#09090f;
+  font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:700;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  transition:transform .2s,box-shadow .2s}
+.pg-btn svg{width:15px;height:15px}
+.pg-btn:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(255,95,126,.4)}
+.pg-btn:active{transform:translateY(-1px)}
+.pg-btn.ghost{background:transparent;color:var(--muted);border:1.5px solid var(--border)}
+.pg-btn.ghost:hover{color:var(--text);border-color:rgba(255,255,255,.3);box-shadow:none}
+.pg-btn:focus-visible{outline:2px solid var(--text);outline-offset:3px}
+.pg-reset{margin-top:14px;text-align:right}
+.pg-reset button{background:none;border:none;color:var(--muted2);font-size:12px;font-weight:600;
+  display:inline-flex;align-items:center;gap:5px;transition:color .2s}
+.pg-reset button svg{width:12px;height:12px}
+.pg-reset button:hover{color:var(--muted)}
+.pg-reset button.arm{color:var(--caring)}
+.pg-out{display:none;margin-top:14px;width:100%;min-height:130px;padding:12px 14px;border-radius:14px;
+  border:1px solid var(--border);background:var(--surface);color:var(--text);
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.55;resize:vertical}
+.pg-out.on{display:block}
+
+.jump-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;position:relative;margin-top:34px}
+.jump-row::before{content:'';position:absolute;inset:-26px -10%;
+  background:radial-gradient(ellipse at center, rgba(9,9,15,.55), transparent 72%);
+  z-index:-1;pointer-events:none}
+.jump{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:var(--pill);
+  font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:600;
+  text-decoration:none;border:1.5px solid transparent;transition:transform .2s,box-shadow .2s}
+.jump svg{width:15px;height:15px}
+.jump:hover{transform:translateY(-4px) rotate(-1.5deg);box-shadow:0 14px 36px rgba(0,0,0,.5)}
+.jump-k{background:var(--caring-dim);color:var(--caring);border-color:rgba(255,95,126,.28)}
+.jump-c{background:var(--curious-dim);color:var(--curious);border-color:rgba(245,200,66,.28)}
+.jump-b{background:var(--constructive-dim);color:var(--constructive);border-color:rgba(0,229,160,.28)}
+.jump-l{background:var(--chill-dim);color:var(--chill-bright);border-color:rgba(123,108,255,.28)}
+
+/* sections */
+section{position:relative;background:var(--bg)}
+.inner{max-width:1080px;margin:0 auto;padding:0 48px}
+.mode{padding:96px 0;border-top:1px solid var(--border)}
+.mode.alt{background:var(--surface)}
+
+.mode-head{max-width:700px;margin-bottom:44px}
+.mode-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.me-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.me-icon svg{width:21px;height:21px}
+.me-essence{font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--muted);text-transform:lowercase}
+.me-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+.me-step{font-family:'Bricolage Grotesque',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);white-space:nowrap}
+.speak{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:var(--pill);
+  border:1.5px solid var(--border);background:transparent;color:var(--muted);
+  font-family:'Bricolage Grotesque',sans-serif;font-size:12.5px;font-weight:600;transition:all .2s;white-space:nowrap}
+.speak svg{width:14px;height:14px}
+.speak:hover{color:var(--text);border-color:rgba(255,255,255,.3)}
+.speak.on{background:var(--chill-dim);border-color:rgba(123,108,255,.55);color:var(--chill-bright)}
+.speak:focus-visible{outline:2px solid var(--text);outline-offset:3px}
+.mode-name{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(40px,6vw,68px);
+  font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:18px}
+.mode-line{font-size:17px;color:var(--muted);line-height:1.7}
+.mode-line strong{color:var(--text);font-weight:600}
+.mode-line + .mode-line{margin-top:14px}
+
+.mode-body{display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:start}
+.mode-body.even{grid-template-columns:1fr 1fr}
+.col-label{display:flex;align-items:center;gap:9px;font-family:'Bricolage Grotesque',sans-serif;
+  font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
+.col-label .cnt{margin-left:auto;color:var(--muted2);letter-spacing:.04em}
+.cl-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+
+/* tick list */
+.tick-list{display:flex;flex-direction:column;gap:10px}
+.tick{display:flex;gap:14px;align-items:flex-start;background:var(--bg);border:1px solid var(--border);
+  border-radius:16px;padding:16px 18px;transition:transform .2s,border-color .2s,box-shadow .2s,opacity .2s}
+.mode.alt .tick{background:var(--surface)}
+.tick:hover{transform:translateY(-2px)}
+.tick input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.box{flex-shrink:0;width:26px;height:26px;border-radius:8px;border:2px solid var(--muted2);
+  display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all .18s}
+.box svg{width:15px;height:15px;opacity:0;transform:scale(.6);transition:all .18s;color:#09090f}
+.tick input:checked ~ .box svg{opacity:1;transform:scale(1)}
+.tick input:focus-visible ~ .box{outline:2px solid var(--text);outline-offset:3px}
+.tick-do{font-size:15.5px;color:var(--text);line-height:1.55;flex:1;min-width:0}
+.tick-do strong{font-weight:600}
+.tick-do small{display:block;font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.6}
+.tick-do .kbd{display:inline-block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;
+  padding:1px 7px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--text)}
+.tick input:checked ~ .tick-do{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--muted2);text-decoration-thickness:1px}
+.tick input:checked ~ .tick-do small{text-decoration:none}
+
+/* done-when + tips */
+.side{display:flex;flex-direction:column;gap:14px;position:sticky;top:96px}
+.done{border-radius:18px;padding:20px 22px;border:1px solid var(--border)}
+.done-lbl{display:flex;align-items:center;gap:8px;font-family:'Bricolage Grotesque',sans-serif;font-size:11px;
+  font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.done-lbl svg{width:14px;height:14px}
+.done p{font-size:15.5px;color:var(--text);line-height:1.55}
+.tip{border-radius:18px;padding:18px 22px;border:1px solid var(--border);background:var(--bg)}
+.mode.alt .tip{background:var(--surface)}
+.tip-lbl{font-family:'Bricolage Grotesque',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.tip p{font-size:14.5px;color:var(--muted);line-height:1.65}
+.tip p strong{color:var(--text);font-weight:600}
+.tip a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+
+/* prompts to paste into Claude */
+.prompt{display:flex;gap:10px;align-items:flex-start;margin-top:12px;background:var(--surface2);
+  border:1px solid var(--border);border-radius:14px;padding:12px 12px 12px 16px}
+.prompt q{flex:1;font-size:14.5px;line-height:1.6;color:var(--text);font-style:italic;quotes:"\201C" "\201D"}
+.prompt q b{font-style:normal;font-weight:600;color:var(--muted)}
+.copy{flex-shrink:0;width:36px;height:36px;border-radius:10px;border:1.5px solid var(--border);
+  background:transparent;color:var(--muted);display:inline-flex;align-items:center;justify-content:center;transition:all .18s}
+.copy svg{width:15px;height:15px}
+.copy:hover{color:var(--text);border-color:rgba(255,255,255,.3)}
+.copy.did{color:var(--constructive);border-color:rgba(0,229,160,.5)}
+.copy:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+
+/* deal grid */
+.deal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.deal{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:22px 20px;
+  transition:transform .2s,border-color .2s,box-shadow .2s}
+.deal:hover{transform:translateY(-3px);border-color:rgba(0,229,160,.35);box-shadow:0 16px 40px rgba(0,229,160,.08)}
+.deal-ico{width:38px;height:38px;border-radius:11px;background:var(--constructive-dim);color:var(--constructive);
+  display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.deal-ico svg{width:18px;height:18px}
+.deal-k{font-family:'Bricolage Grotesque',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.deal-v{font-family:'Bricolage Grotesque',sans-serif;font-size:21px;font-weight:700;letter-spacing:-.02em;
+  line-height:1.25;color:var(--text);margin-bottom:8px}
+.deal p{font-size:14px;color:var(--muted);line-height:1.6}
+.fill{display:inline-block;color:var(--caring);border-bottom:2px dashed rgba(255,95,126,.55);padding-bottom:1px}
+.deal-note{margin-top:24px;font-size:15px;color:var(--muted);line-height:1.65;max-width:64ch}
+.deal-note strong{color:var(--text);font-weight:600}
+
+/* three weeks strip */
+.weeks{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+.week{background:var(--surface2);border:1px solid var(--border);border-radius:18px;padding:20px 22px}
+.week-n{font-family:'Bricolage Grotesque',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--constructive);margin-bottom:8px}
+.week-t{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:700;letter-spacing:-.02em;
+  color:var(--text);line-height:1.3;margin-bottom:8px}
+.week p{font-size:14px;color:var(--muted);line-height:1.6}
+
+/* numbered steps */
+.steps{list-style:none;display:flex;flex-direction:column;gap:12px;counter-reset:s}
+.step{display:flex;gap:16px;align-items:flex-start;background:var(--bg);border:1px solid var(--border);
+  border-radius:16px;padding:18px 20px}
+.mode.alt .step{background:var(--surface)}
+.step::before{counter-increment:s;content:counter(s);flex-shrink:0;width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:800;font-size:14px;background:var(--chill-dim);color:var(--chill-bright)}
+.step div{font-size:15.5px;color:var(--text);line-height:1.55}
+.step div small{display:block;font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.6}
+
+/* mode theming */
+.mode-k .me-icon{background:var(--caring-dim);color:var(--caring)}
+.mode-k .me-essence{color:var(--caring)} .mode-k .cl-dot{background:var(--caring)}
+.mode-k .tick input:checked ~ .box{background:var(--caring);border-color:var(--caring)}
+.mode-k .tick:hover{border-color:rgba(255,95,126,.35);box-shadow:0 16px 40px rgba(255,95,126,.08)}
+.mode-k .done{background:var(--caring-dim);border-color:rgba(255,95,126,.3)} .mode-k .done-lbl{color:var(--caring)}
+
+.mode-c .me-icon{background:var(--curious-dim);color:var(--curious)}
+.mode-c .me-essence{color:var(--curious)} .mode-c .cl-dot{background:var(--curious)}
+.mode-c .tick input:checked ~ .box{background:var(--curious);border-color:var(--curious)}
+.mode-c .tick:hover{border-color:rgba(245,200,66,.35);box-shadow:0 16px 40px rgba(245,200,66,.08)}
+.mode-c .done{background:var(--curious-dim);border-color:rgba(245,200,66,.3)} .mode-c .done-lbl{color:var(--curious)}
+
+.mode-b .me-icon{background:var(--constructive-dim);color:var(--constructive)}
+.mode-b .me-essence{color:var(--constructive)} .mode-b .cl-dot{background:var(--constructive)}
+.mode-b .tick input:checked ~ .box{background:var(--constructive);border-color:var(--constructive)}
+.mode-b .tick:hover{border-color:rgba(0,229,160,.35);box-shadow:0 16px 40px rgba(0,229,160,.08)}
+.mode-b .done{background:var(--constructive-dim);border-color:rgba(0,229,160,.3)} .mode-b .done-lbl{color:var(--constructive)}
+
+.mode-l .me-icon{background:var(--chill-dim);color:var(--chill-bright)}
+.mode-l .me-essence{color:var(--chill-bright)} .mode-l .cl-dot{background:var(--chill-bright)}
+.mode-l .tick input:checked ~ .box{background:var(--chill-bright);border-color:var(--chill-bright)}
+.mode-l .tick:hover{border-color:rgba(123,108,255,.4);box-shadow:0 16px 40px rgba(123,108,255,.1)}
+.mode-l .done{background:var(--chill-dim);border-color:rgba(123,108,255,.3)} .mode-l .done-lbl{color:var(--chill-bright)}
+
+/* goal cards */
+.goal{background:var(--bg);border:1px solid var(--border);border-radius:18px;padding:20px 22px;margin-bottom:12px}
+.mode.alt .goal{background:var(--surface)}
+.goal-head .tick{background:transparent;border:none;padding:0}
+.goal-head .tick:hover{transform:none}
+.goal-n{font-family:'Bricolage Grotesque',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--constructive);margin-bottom:4px;display:block}
+.goal-t{font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:700;letter-spacing:-.02em;color:var(--text);line-height:1.3}
+.goal-body{margin-top:14px;padding-left:40px}
+.goal-body p{font-size:15px;color:var(--muted);line-height:1.65}
+.goal-body p strong{color:var(--text);font-weight:600}
+.goal-done{margin-top:14px;font-size:14px;color:var(--muted)}
+.goal-done b{color:var(--constructive);font-weight:700;font-family:'Bricolage Grotesque',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-right:8px}
+
+/* closing */
+.closing{padding:110px 0;border-top:1px solid var(--border);text-align:center;position:relative;overflow:hidden}
+.closing .gblob{opacity:.35}
+.closing-inner{position:relative;z-index:1;max-width:620px;margin:0 auto;padding:0 32px}
+.closing h2{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(32px,5vw,52px);
+  font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:18px}
+.closing p{font-size:17px;color:var(--muted);line-height:1.7;margin-bottom:16px}
+.closing .sig{font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:700;
+  color:var(--text);margin:30px 0 34px;line-height:1.5}
+.closing-btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.btn-primary{background:var(--caring);color:#09090f;padding:14px 32px;border-radius:var(--pill);
+  font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(255,95,126,.4)}
+.btn-ghost{border:1.5px solid var(--border);color:var(--muted);padding:13px 28px;border-radius:var(--pill);
+  font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:600;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-ghost:hover{border-color:rgba(255,255,255,.3);color:var(--text)}
+
+/* footer */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 32px 48px;text-align:center}
+.foot-logo{display:inline-flex;align-items:center;gap:0;font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:800;font-size:18px;color:var(--text);text-decoration:none;letter-spacing:-.04em;margin-bottom:18px}
+.foot-logo img{height:32px;width:auto;object-fit:contain}
+.foot-logo em{font-style:normal;color:var(--caring)}
+.foot-tag{font-size:13px;color:var(--muted);margin-bottom:4px}
+.foot-divider{width:40px;height:1px;background:var(--border);margin:22px auto}
+.foot-initiative{font-size:13px;color:var(--muted2)}
+.foot-initiative a{color:var(--muted);text-decoration:none}
+.foot-initiative a:hover{color:var(--text)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s,transform .6s cubic-bezier(.34,1.56,.64,1)}
+.reveal.vis{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+@media(max-width:960px){
+  .deal-grid{grid-template-columns:1fr 1fr}
+  .weeks{grid-template-columns:1fr}
+  .mode-body,.mode-body.even{grid-template-columns:1fr;gap:34px}
+  .side{position:static}
+}
+@media(max-width:840px){
+  nav{padding:16px 22px} .nav-links{gap:18px} .nav-links li.hide-sm{display:none}
+  .inner{padding:0 24px}
+  .hero{padding:132px 0 70px} .hero-inner{padding:0 22px}
+  .progress{padding:26px 22px 24px;border-radius:22px}
+  .mode{padding:72px 0} .mode-head{margin-bottom:34px}
+  .closing{padding:84px 0}
+  .goal-body{padding-left:0}
+  .me-right{margin-left:0;width:100%}
+}
+@media(max-width:520px){
+  .deal-grid{grid-template-columns:1fr}
+  .me-step{display:none}
+}
+
+/* print: the fridge copy */
+@media print{
+  @page{margin:14mm}
+  html,body{background:#fff !important;color:#111 !important;cursor:auto}
+  body{font-size:11.5pt;line-height:1.45;letter-spacing:normal;word-spacing:normal}
+  .cursor-dot,.cursor-ring,nav,.gblob,.jump-row,.pg-btns,.pg-reset,.pg-out,.copy,.closing-btns,.readbar,.speak,footer .foot-divider{display:none !important}
+  .reveal{opacity:1 !important;transform:none !important}
+  .hero{padding:0 0 18pt;text-align:left}
+  .hero-inner{padding:0;max-width:none}
+  .hero-pill{border-color:#bbb;color:#555;background:none;margin-bottom:14pt}
+  .hero-pill .dot{background:#555;animation:none}
+  .hero h1{font-size:30pt;margin-bottom:10pt;color:#111}
+  .hero h1 .accent{color:#c8304f}
+  .hero-sub{color:#444;max-width:none;margin:0 0 14pt}
+  .hero-sub strong{color:#111}
+  .progress{background:none;border:1px solid #999;box-shadow:none;padding:12pt 14pt;max-width:none;backdrop-filter:none}
+  .pg-label{color:#c8304f}
+  .pg-count,.pg-count b{color:#111}
+  .pg-bar{background:#e5e5e5} .pg-fill{background:#333}
+  .pg-note{color:#555} .pg-note strong{color:#111}
+  section,.mode,.mode.alt{background:#fff !important;border-top:1px solid #ccc;padding:16pt 0;break-inside:avoid-page}
+  .inner{padding:0;max-width:none}
+  .mode-head{margin-bottom:10pt;max-width:none}
+  .me-icon{border:1px solid #999;background:none !important;color:#111 !important}
+  .me-essence{color:#666 !important} .me-step{color:#999}
+  .mode-name{font-size:20pt;margin-bottom:6pt;color:#111}
+  .mode-line{font-size:11pt;color:#444}
+  .mode-line strong{color:#111}
+  .mode-body,.mode-body.even{grid-template-columns:1fr;gap:10pt}
+  .col-label{color:#666;margin-bottom:8pt} .col-label .cnt{display:none} .cl-dot{background:#666 !important}
+  .tick-list{gap:5pt}
+  .tick,.mode.alt .tick{background:none;border:none;padding:3pt 0;break-inside:avoid}
+  .box{border:1.5px solid #333;border-radius:4px;background:none !important}
+  .tick input:checked ~ .box{background:#333 !important;border-color:#333 !important}
+  .tick input:checked ~ .box svg{color:#fff}
+  .tick-do{color:#111 !important;text-decoration:none !important}
+  .tick-do small{color:#555}
+  .tick-do .kbd{border-color:#999;background:none;color:#111}
+  .side{position:static}
+  .done{background:none !important;border:1px solid #999;padding:8pt 10pt}
+  .done-lbl{color:#111 !important} .done p{color:#111}
+  .tip{background:none !important;border:1px dashed #aaa;padding:8pt 10pt}
+  .tip-lbl{color:#666} .tip p{color:#444} .tip p strong{color:#111}
+  .prompt{background:none;border:1px solid #bbb;padding:6pt 8pt}
+  .prompt q{color:#111} .prompt q b{color:#555}
+  .deal-grid{grid-template-columns:1fr 1fr;gap:8pt}
+  .deal{background:none;border:1px solid #999;padding:10pt 12pt}
+  .deal-ico{display:none}
+  .deal-k{color:#666} .deal-v{color:#111;font-size:14pt} .deal p{color:#444}
+  .fill{color:#c8304f;border-bottom-color:#c8304f}
+  .deal-note{color:#444} .deal-note strong{color:#111}
+  .weeks{grid-template-columns:repeat(3,1fr);gap:8pt}
+  .week{background:none;border:1px solid #999;padding:8pt 10pt}
+  .week-n{color:#666} .week-t{color:#111;font-size:12pt} .week p{color:#444}
+  .steps{gap:5pt} .step,.mode.alt .step{background:none;border:none;padding:3pt 0}
+  .step::before{background:none;border:1.5px solid #333;color:#111}
+  .step div{color:#111} .step div small{color:#555}
+  .goal,.mode.alt .goal{background:none;border:1px solid #999;padding:10pt 12pt;margin-bottom:8pt;break-inside:avoid}
+  .goal-n{color:#666} .goal-t{color:#111} .goal-body p{color:#444} .goal-body p strong{color:#111}
+  .goal-done{color:#444} .goal-done b{color:#111}
+  .closing{padding:16pt 0;text-align:left;border-top:1px solid #ccc}
+  .closing-inner{padding:0;max-width:none}
+  .closing h2{font-size:18pt;color:#111} .closing p{color:#444;font-size:11pt} .closing .sig{color:#111;margin:10pt 0 0}
+  footer{background:#fff;border-top:1px solid #ccc;padding:12pt 0 0}
+  .foot-logo{color:#111} .foot-logo em{color:#c8304f} .foot-logo img{display:none}
+  .foot-tag{color:#555} .foot-initiative,.foot-initiative a{color:#777}
+}
+</style>
+</head>
+<body id="top">
+
+<div class="cursor-ring" id="cring"></div>
+<div class="cursor-dot" id="cdot"></div>
+
+<nav>
+  <a href="https://selfdriven.you/" class="nav-logo"><span class="markdots"><i></i><i></i><i></i><i></i></span><span style="margin-left:6px">selfdriven<em>.you</em></span></a>
+  <ul class="nav-links">
+    <li class="hide-sm"><a href="#deal">The deal</a></li>
+    <li class="hide-sm"><a href="#talk">Talk, don't type</a></li>
+    <li class="hide-sm"><a href="#phone">Phone</a></li>
+    <li class="hide-sm"><a href="#laptop">Laptop</a></li>
+    <li class="hide-sm"><a href="#claude">Claude</a></li>
+    <li class="hide-sm"><a href="#goals">Goals</a></li>
+    <li class="hide-sm"><a href="#show">Show and tell</a></li>
+    <li><a href="selfdriven-you-russ.html" class="back"><svg><use href="#ic-arrow-left"/></svg>One small thing</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="gblob gb1"></div><div class="gblob gb2"></div>
+  <div class="gblob gb3"></div><div class="gblob gb4"></div>
+  <div class="hero-inner">
+    <div class="hero-pill"><span class="dot"></span>the next bit, from Pete</div>
+    <h1>Have a<br><span class="accent">go.</span></h1>
+    <p class="hero-sub">Three weeks. A phone, a laptop, an email address, and a thing that types back. We talk most days. You get paid for your time. <strong>Nothing on this page is a test.</strong></p>
+
+    <div class="readbar">
+      <button class="rb" id="easyToggle" type="button" aria-pressed="false"><svg><use href="#ic-text"/></svg>Bigger text</button>
+      <button class="rb" id="readAll" type="button"><svg><use href="#ic-speaker"/></svg>Read this to me</button>
+    </div>
+
+    <div class="progress">
+      <div class="pg-label"><svg><use href="#ic-sparkles"/></svg>Where you're up to</div>
+      <div class="pg-count"><b id="pgDone">0</b> of <span id="pgTotal">0</span> ticked</div>
+      <div class="pg-bar"><div class="pg-fill" id="pgFill"></div></div>
+      <p class="pg-note">Ticks save on this device. Tap <strong>Copy my progress</strong> and paste it into a text to Pete before a call. Print it if you'd rather a pen and the fridge.</p>
+      <div class="pg-btns">
+        <button class="pg-btn" id="copyProgress" type="button"><svg><use href="#ic-copy"/></svg>Copy my progress</button>
+        <button class="pg-btn ghost" id="printPage" type="button"><svg><use href="#ic-print"/></svg>Print it</button>
+      </div>
+      <textarea class="pg-out" id="pgOut" readonly aria-label="Your progress as text"></textarea>
+      <div class="pg-reset"><button type="button" id="resetTicks"><svg><use href="#ic-undo"/></svg>Start over</button></div>
+    </div>
+
+    <div class="jump-row">
+      <a href="#talk" class="jump jump-l"><svg><use href="#ic-mic"/></svg>Talk, don't type</a>
+      <a href="#phone" class="jump jump-c"><svg><use href="#ic-phone"/></svg>Phone</a>
+      <a href="#laptop" class="jump jump-l"><svg><use href="#ic-laptop"/></svg>Laptop</a>
+      <a href="#doc" class="jump jump-k"><svg><use href="#ic-doc"/></svg>Your log</a>
+      <a href="#claude" class="jump jump-c"><svg><use href="#ic-chat"/></svg>Claude</a>
+      <a href="#goals" class="jump jump-b"><svg><use href="#ic-branch"/></svg>First goals</a>
+      <a href="#show" class="jump jump-k"><svg><use href="#ic-mic"/></svg>Show and tell</a>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── THE DEAL ───────────────────────── -->
+<section class="mode mode-b alt" id="deal">
+  <div class="inner">
+    <div class="mode-head">
+      <div class="mode-eyebrow">
+        <div class="me-icon"><svg><use href="#ic-hammer"/></svg></div>
+        <div class="me-essence">all out in the open</div>
+        <div class="me-right"><button class="speak" type="button"><svg><use href="#ic-speaker"/></svg>Read this bit</button></div>
+      </div>
+      <h2 class="mode-name">The deal</h2>
+      <p class="mode-line">The whole arrangement in one spot, so neither of us has to remember it. <strong>You do the things on this page. I pay you for your time.</strong> Not for getting it right. For turning up to it.</p>
+      <p class="mode-line">Three weeks. A quick call most days, a longer one at the end of each week. The money is the same whether a week took you three hours or thirty.</p>
+    </div>
+
+    <div class="deal-grid">
+      <div class="deal">
+        <div class="deal-ico"><svg><use href="#ic-video"/></svg></div>
+        <div class="deal-k">The rhythm</div>
+        <div class="deal-v">A call most days</div>
+        <p>Google Meet, ten minutes, whatever you got to. Longer one on payday. You live down the road, so some of them will just be in person.</p>
+      </div>
+      <div class="deal">
+        <div class="deal-ico"><svg><use href="#ic-cash"/></svg></div>
+        <div class="deal-k">The money</div>
+        <!-- PETE-AMOUNT / PETE-PAYDAY -->
+        <div class="deal-v"><span class="fill" id="dealAmount">$250</span> for week one</div>
+        <p>In your account on <span class="fill" id="dealPayday">Friday</span>. Weeks two and three we agree on the call, based on what you take on.</p>
+      </div>
+      <div class="deal">
+        <div class="deal-ico"><svg><use href="#ic-seed"/></svg></div>
+        <div class="deal-k">Your ten percent</div>
+        <div class="deal-v">$25 goes to the future</div>
+        <p>Ten percent of every payment goes into an investment account in your name. Still your money. Just the bit you don't spend on Friday.</p>
+      </div>
+      <div class="deal">
+        <div class="deal-ico"><svg><use href="#ic-shirt"/></svg></div>
+        <div class="deal-k">The end of it</div>
+        <!-- PETE-DATE -->
+        <div class="deal-v">Show and tell, <span class="fill" id="dealDate">date to come</span></div>
+        <p>Ten minutes on what you did. Then the shirt, the last payment, and we pick the next thing together.</p>
+      </div>
+    </div>
+
+    <div class="weeks">
+      <div class="week">
+        <div class="week-n">Week one</div>
+        <div class="week-t">Get set up</div>
+        <p>Phone, email, laptop, your log, and Claude. By Friday you own five things you didn't own on Monday.</p>
+      </div>
+      <div class="week">
+        <div class="week-n">Week two</div>
+        <div class="week-t">Build something</div>
+        <p>The three goals. A GitHub account, a page about you, and a real web address you can send to anyone.</p>
+      </div>
+      <div class="week">
+        <div class="week-n">Week three</div>
+        <div class="week-t">Tidy it and tell it</div>
+        <p>Fix what's rough, catch the log up, work out your three-two-one, and show me.</p>
+      </div>
+    </div>
+
+    <p class="deal-note"><strong>If a week goes sideways, we move it.</strong> Nobody's behind and there's no streak to keep. And if you're getting anything from Centrelink, tell them about this money. I'll help you do it. Not telling them makes a debt later, and we're not doing that to you.</p>
+  </div>
+</section>
+
+<!-- ───────────────────────── TALK, DON'T TYPE ───────────────────────── -->
+<section class="mode mode-l" id="talk" data-stage="Talk, don't type">
+  <div class="inner">
+    <div class="mode-head">
+      <div class="mode-eyebrow">
+        <div class="me-icon"><svg><use href="#ic-mic"/></svg></div>
+        <div class="me-essence">reading a screen is work</div>
+        <div class="me-right"><button class="speak" type="button"><svg><use href="#ic-speaker"/></svg>Read this bit</button></div>
+      </div>
+      <h2 class="mode-name">Talk, don't type</h2>
+      <p class="mode-line">Do this bit first, because it changes everything else on the page. <strong>You can talk to all of it instead of typing, and you can make all of it read itself out loud to you.</strong></p>
+      <p class="mode-line">And the big one: <strong>Claude does not care about spelling.</strong> Type it how it sounds. It works out what you meant and never mentions it. No red squiggles, no one looking over your shoulder.</p>
+    </div>
+    <div class="mode-body">
+      <div>
+        <div class="col-label"><span class="cl-dot"></span>Set these up once<span class="cnt"></span></div>
+        <div class="tick-list">
+          <label class="tick"><input type="checkbox" data-id="t1"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">On the phone, find the little <strong>microphone</strong> on the keyboard. Tap it and talk.<small>It types what you say, anywhere on the phone. Texts, searches, Claude, your log. Practise once by texting Pete something out loud.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="t2"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">In the Claude app, use the <strong>microphone in the message box</strong> instead of typing.<small>Say a whole rambling paragraph. It sorts it out. This is the fastest way to use it, and honestly it's how most people should be doing it.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="t3"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">On the laptop, in Google Docs: <strong>Tools</strong>, then <strong>Voice typing</strong>. Talk, it writes.<small>This is how you'll do your log. Talk for a minute, done. The shortcut is <span class="kbd">Ctrl</span> <span class="kbd">Shift</span> <span class="kbd">S</span>.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="t4"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Try the <strong>Read this to me</strong> buttons at the top of every section on this page.<small>That's what they're there for. Same with the <strong>Bigger text</strong> button up the top if the lines feel tight.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="t5"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Any web page can read itself. On the phone, Chrome's menu has <strong>Listen to this page</strong>.<small>On the laptop it's in Edge, called Read aloud. Works on anything, including things that aren't from Pete.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="t6"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Whenever something's written badly, ask Claude to fix it.<div class="prompt"><q>Say that again in short sentences and plain words.</q><button class="copy" type="button" aria-label="Copy this"><svg><use href="#ic-copy"/></svg></button></div></span></label>
+        </div>
+      </div>
+      <div class="side">
+        <div class="done">
+          <div class="done-lbl"><svg><use href="#ic-check"/></svg>Done when</div>
+          <p>You've sent one message you spoke instead of typed.</p>
+        </div>
+        <div class="tip">
+          <div class="tip-lbl">Why this matters more than it sounds</div>
+          <p>Most people who struggle with computers aren't struggling with computers. <strong>They're struggling with a wall of small grey text.</strong> Take the wall away and the computer bit turns out to be easy.</p>
+        </div>
+        <div class="tip">
+          <div class="tip-lbl">Stuck on a word</div>
+          <p>Screenshot it and ask Claude what it means. <strong>Nobody is keeping score and nobody finds out you asked.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── PHONE + EMAIL ───────────────────────── -->
+<section class="mode mode-c alt" id="phone" data-stage="Phone and email">
+  <div class="inner">
+    <div class="mode-head">
+      <div class="mode-eyebrow">
+        <div class="me-icon"><svg><use href="#ic-phone"/></svg></div>
+        <div class="me-essence">everything hangs off this</div>
+        <div class="me-right"><div class="me-step">Week one</div><button class="speak" type="button"><svg><use href="#ic-speaker"/></svg>Read this bit</button></div>
+      </div>
+      <h2 class="mode-name">Phone and email</h2>
+      <p class="mode-line">The phone first, because Google and Claude both check you're real by texting you. <strong>Once the phone's on and the new email exists, everything else is just signing in.</strong></p>
+      <p class="mode-line">New number, so keep the old phone going for a bit and tell people as you go. No rush on that.</p>
+      <p class="mode-line">Pick an email you'd be happy to put on a job application. Your name, or close to it. No years, no nicknames.</p>
+    </div>
+    <div class="mode-body">
+      <div>
+        <div class="col-label"><span class="cl-dot"></span>Do these<span class="cnt"></span></div>
+        <div class="tick-list">
+          <label class="tick"><input type="checkbox" data-id="p1"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">SIM in, phone on, connected to your wifi at home.<small>Get Pete to text the new number so you know texts arrive. Google needs to send you one in a minute.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="p2"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">When it asks for a Google account, tap <strong>Create account</strong>, then the one for yourself.<small>Not work, not a child. This makes your new email address. Take your time on the name. Everything else hangs off it.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="p3"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Password: three random words and a number. Write it on paper.<small>The paper lives in a drawer at home. Not your wallet, not the phone. Everyone writes passwords down somewhere. Make yours somewhere sensible.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="p4"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Recovery: add your new mobile number and Pete's email.<small>If you ever get locked out, that's the way back in. It also means Pete gets a heads-up if someone else tries to get in.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="p5"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Say yes to 2-step verification when it offers.<small>Your phone becomes the key. Someone with your password and not your phone still can't get in.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="p6"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Fingerprint or a PIN on the lock screen.</span></label>
+          <label class="tick"><input type="checkbox" data-id="p7"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Whenever it asks <strong>Save password?</strong>, say yes. Every time.<small>That's Google Password Manager. It's your password book from now on, and it'll be on the laptop too once you sign in there.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="p8"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Install <strong>Google Meet</strong> from the Play Store, and let it use the camera and microphone.<small>That's how we do the daily calls when you're not round here.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="p9"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Email Pete from the new address. Subject line: <strong>it works</strong>. Say it out loud with the microphone if you like.</span></label>
+        </div>
+      </div>
+      <div class="side">
+        <div class="done">
+          <div class="done-lbl"><svg><use href="#ic-check"/></svg>Done when</div>
+          <p>Pete's got an email from your new address that says "it works".</p>
+        </div>
+        <div class="tip">
+          <div class="tip-lbl">If setup asks something you don't get</div>
+          <p>Skip it. <strong>Nothing in phone setup is final.</strong> Backups, assistants, themes, all of it can be turned on later or never.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── LAPTOP ───────────────────────── -->
+<section class="mode mode-l" id="laptop" data-stage="The laptop">
+  <div class="inner">
+    <div class="mode-head">
+      <div class="mode-eyebrow">
+        <div class="me-icon"><svg><use href="#ic-laptop"/></svg></div>
+        <div class="me-essence">windows asks a lot of questions</div>
+        <div class="me-right"><div class="me-step">Week one</div><button class="speak" type="button"><svg><use href="#ic-speaker"/></svg>Read this bit</button></div>
+      </div>
+      <h2 class="mode-name">The laptop</h2>
+      <p class="mode-line">Windows will try to sell you five things before you reach the desktop. <strong>Skip or say no to all of it.</strong> You can turn something on later. Turning things off later is harder.</p>
+      <p class="mode-line">It'll also want to update for a while. That's normal. Make a cuppa and leave it plugged in.</p>
+    </div>
+    <div class="mode-body">
+      <div>
+        <div class="col-label"><span class="cl-dot"></span>Do these<span class="cnt"></span></div>
+        <div class="tick-list">
+          <label class="tick"><input type="checkbox" data-id="l1"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Plug it in, turn it on, connect to the wifi.</span></label>
+          <label class="tick"><input type="checkbox" data-id="l2"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">When it asks for a Microsoft account, make one with your <strong>new Gmail address</strong>.<small>Microsoft accepts any email. Same address, different password. On the paper it goes.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="l3"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Skip: OneDrive backup, the Office trial, Game Pass, and anything called "recommended".<small>No is a complete answer. If there's no skip button, look for the small grey text. It's usually there.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="l4"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Set a PIN for logging in.<small>Windows calls it Windows Hello. Four to six digits. Just for this laptop.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="l5"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Let it update. Restart when it asks. Cuppa.<small>Might be twenty minutes, might be an hour. Don't turn it off partway.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="l6"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Open Edge, search <strong>Google Chrome</strong>, install it. Sign in to Chrome with your Google account and turn on sync.<small>Now the phone and the laptop share one password book. Anything saved on one shows up on the other.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="l7"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Make Chrome the default browser when it offers.</span></label>
+          <label class="tick"><input type="checkbox" data-id="l8"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Learn one shortcut: <span class="kbd">Windows</span> <span class="kbd">Shift</span> <span class="kbd">S</span>, then drag a box.<small>That's a screenshot. Paste it anywhere with <span class="kbd">Ctrl</span> <span class="kbd">V</span>. You'll use this more than anything else on the laptop.</small></span></label>
+        </div>
+      </div>
+      <div class="side">
+        <div class="done">
+          <div class="done-lbl"><svg><use href="#ic-check"/></svg>Done when</div>
+          <p>You open Gmail in Chrome on the laptop and see the "it works" email you sent Pete.</p>
+        </div>
+        <div class="tip">
+          <div class="tip-lbl">Two windows, side by side</div>
+          <p>Drag a window to the left edge of the screen and it snaps to half. <strong>Claude on one side, the thing you're doing on the other.</strong> That's how everyone works, and it makes the whole thing click.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── YOUR LOG ───────────────────────── -->
+<section class="mode mode-k alt" id="doc" data-stage="Your log">
+  <div class="inner">
+    <div class="mode-head">
+      <div class="mode-eyebrow">
+        <div class="me-icon"><svg><use href="#ic-doc"/></svg></div>
+        <div class="me-essence">three lines, spoken not typed</div>
+        <div class="me-right"><div class="me-step">Week one</div><button class="speak" type="button"><svg><use href="#ic-speaker"/></svg>Read this bit</button></div>
+      </div>
+      <h2 class="mode-name">Your log</h2>
+      <p class="mode-line">One document called <strong>What I did</strong>, shared with Pete. Every time you finish a sitting, three lines: what I did, how I did it, what I learned.</p>
+      <p class="mode-line">Use voice typing. <strong>Talk for one minute and you're done.</strong> This is also what we talk about on the calls, so you never have to remember anything. And it turns into the show and tell on its own.</p>
+    </div>
+    <div class="mode-body">
+      <div>
+        <div class="col-label"><span class="cl-dot"></span>Do these<span class="cnt"></span></div>
+        <div class="tick-list">
+          <label class="tick"><input type="checkbox" data-id="d1"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">On the laptop in Chrome, go to <strong>docs.google.com</strong>. New blank document. Call it <strong>What I did</strong>.</span></label>
+          <label class="tick"><input type="checkbox" data-id="d2"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Share it with Pete. The <strong>Share</strong> button, top right. Editor is fine.</span></label>
+          <label class="tick"><input type="checkbox" data-id="d3"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">First entry now, out loud. <strong>Tools</strong>, then <strong>Voice typing</strong>. Today's date, then the three lines.<small>"Set up a phone. Followed the screens. Learned Windows asks a lot of questions." That counts. It doesn't have to be good, it has to be there.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="d4"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Put the Google Docs app on the phone, so the log is one tap away.</span></label>
+          <label class="tick"><input type="checkbox" data-id="d5"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Don't tidy the spelling. Seriously.<small>Nobody is marking it. Pete can read it fine. If it ever really matters, Claude will tidy it in five seconds.</small></span></label>
+        </div>
+      </div>
+      <div class="side">
+        <div class="done">
+          <div class="done-lbl"><svg><use href="#ic-check"/></svg>Done when</div>
+          <p>Pete can open the doc and see your first three lines.</p>
+        </div>
+        <div class="tip">
+          <div class="tip-lbl">The three lines</div>
+          <p><strong>What I did. How I did it. What I learned.</strong> "It was annoying" is a legitimate thing you learned. So is "I gave up and came back tomorrow".</p>
+        </div>
+        <div class="tip">
+          <div class="tip-lbl">Can't be bothered writing it</div>
+          <p>Send Pete a voice message instead and say it there. <strong>The point is that it gets said, not that it gets typed.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── CLAUDE ───────────────────────── -->
+<section class="mode mode-c" id="claude" data-stage="Claude">
+  <div class="inner">
+    <div class="mode-head">
+      <div class="mode-eyebrow">
+        <div class="me-icon"><svg><use href="#ic-chat"/></svg></div>
+        <div class="me-essence">the thing that types back</div>
+        <div class="me-right"><div class="me-step">Week one</div><button class="speak" type="button"><svg><use href="#ic-speaker"/></svg>Read this bit</button></div>
+      </div>
+      <h2 class="mode-name">Claude</h2>
+      <p class="mode-line">It's a thing you talk at. It talks back. It's not a person and it's not your mate, and it won't fix anything on its own. <strong>What it is: there at 3am, doesn't get bored, doesn't tell anyone, and has no idea what you did last year.</strong></p>
+      <p class="mode-line">Don't test it with something clever. Ask it something you actually want to know.</p>
+    </div>
+    <div class="mode-body">
+      <div>
+        <div class="col-label"><span class="cl-dot"></span>Do these<span class="cnt"></span></div>
+        <div class="tick-list">
+          <label class="tick"><input type="checkbox" data-id="c1"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">On the laptop go to <strong>claude.ai</strong>. Tap <strong>Continue with Google</strong> and pick your new account.<small>It'll text your phone a code. That's the phone earning its keep.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="c2"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Put the Claude app on the phone. Play Store, search <strong>Claude by Anthropic</strong>. Sign in with Google.<small>Do this early, because the microphone in the app is the easiest way in.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="c3"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">First conversation, free version, using the microphone. Pick one of these or say your own. Read what comes back. Ask a follow-up.
+            <div class="prompt"><q>I've got twenty bucks and half a fridge. What can I cook?</q><button class="copy" type="button" aria-label="Copy this"><svg><use href="#ic-copy"/></svg></button></div>
+            <div class="prompt"><q>My car's making a noise like <b>[describe it]</b>. Where do I start?</q><button class="copy" type="button" aria-label="Copy this"><svg><use href="#ic-copy"/></svg></button></div>
+            <div class="prompt"><q>What would it take to <b>[the thing you keep saying you'll do]</b>?</q><button class="copy" type="button" aria-label="Copy this"><svg><use href="#ic-copy"/></svg></button></div>
+          </span></label>
+          <label class="tick"><input type="checkbox" data-id="c4"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Tell it about you, once. In <strong>Settings</strong>, find the box asking what Claude should know about you. Paste this in, change anything that isn't true:
+            <div class="prompt"><q>I'm new to computers and I'm learning. Use short sentences and plain words. One step at a time, and wait for me to say done before the next step. Don't worry about my spelling, just work out what I meant. I'm in Australia.</q><button class="copy" type="button" aria-label="Copy this"><svg><use href="#ic-copy"/></svg></button></div>
+            <small>This changes every conversation you ever have with it. It is the single most useful thing on this page.</small>
+          </span></label>
+          <label class="tick"><input type="checkbox" data-id="c5"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">The subscription. Check with Pete that the money's landed first. Then in Claude go to <strong>Settings</strong>, then <strong>Billing</strong>, and pick <strong>Pro, monthly</strong>. Your card.<small>The price shows at checkout. That's what leaves your account each month, and Pete tops you up three months at a time. It's your subscription in your name, and that's the point.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="c6"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Three lines in the log.</span></label>
+        </div>
+      </div>
+      <div class="side">
+        <div class="done">
+          <div class="done-lbl"><svg><use href="#ic-check"/></svg>Done when</div>
+          <p>You've had one real conversation, and Pro shows in your settings.</p>
+        </div>
+        <div class="tip">
+          <div class="tip-lbl">How to talk to it</div>
+          <p>Like a mate who happens to know things. <strong>Say what you actually want, and tell it when it's lost you.</strong> "I don't get that, say it simpler" works every single time.</p>
+        </div>
+        <div class="tip">
+          <div class="tip-lbl">What it's not</div>
+          <p>Not a doctor, not a lawyer, not always right. If it matters, check it. If it's about a person, talk to the person.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── FIRST GOALS ───────────────────────── -->
+<section class="mode mode-b alt" id="goals" data-stage="First goals">
+  <div class="inner">
+    <div class="mode-head">
+      <div class="mode-eyebrow">
+        <div class="me-icon"><svg><use href="#ic-branch"/></svg></div>
+        <div class="me-essence">something with a before and an after</div>
+        <div class="me-right"><div class="me-step">Week two</div><button class="speak" type="button"><svg><use href="#ic-speaker"/></svg>Read this bit</button></div>
+      </div>
+      <h2 class="mode-name">First goals</h2>
+      <p class="mode-line">GitHub is where people keep and share the things they make on computers. Millions of people have a page there. <strong>By the end of this week you'll have one too, with a real web address you can send to anyone.</strong></p>
+      <p class="mode-line">You're not following instructions from me for this bit. You ask Claude and you do it for the first time. That's the whole point. When it says something you don't get, screenshot it and ask.</p>
+    </div>
+    <div class="mode-body">
+      <div>
+        <div class="col-label"><span class="cl-dot"></span>Three goals<span class="cnt"></span></div>
+
+        <div class="goal">
+          <div class="goal-head">
+            <label class="tick"><input type="checkbox" data-id="g1"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do"><span class="goal-n">Goal 1</span><span class="goal-t">A GitHub account</span></span></label>
+          </div>
+          <div class="goal-body">
+            <p>New conversation with Claude. Paste or say this:</p>
+            <div class="prompt"><q>I've never used GitHub. Help me make an account, one step at a time, and wait for me to say done before the next step.</q><button class="copy" type="button" aria-label="Copy this"><svg><use href="#ic-copy"/></svg></button></div>
+            <p style="margin-top:12px">Use your new Gmail. <strong>Pick a username you'd put on a job application</strong>, because it ends up in your web address.</p>
+            <div class="goal-done"><b>Done when</b>You can log in at github.com.</div>
+          </div>
+        </div>
+
+        <div class="goal">
+          <div class="goal-head">
+            <label class="tick"><input type="checkbox" data-id="g2"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do"><span class="goal-n">Goal 2</span><span class="goal-t">A page about you</span></span></label>
+          </div>
+          <div class="goal-body">
+            <div class="prompt"><q>Help me create my first GitHub repository with a README that says who I am and what I'm good at. I want to do it all in the browser. One step at a time.</q><button class="copy" type="button" aria-label="Copy this"><svg><use href="#ic-copy"/></svg></button></div>
+            <p style="margin-top:12px">Three sentences is plenty. <strong>What you're good at, what you're into, what you're learning.</strong> Say it out loud to Claude and let it write it down. You can change it any time, forever.</p>
+            <div class="goal-done"><b>Done when</b>Your words show up on github.com.</div>
+          </div>
+        </div>
+
+        <div class="goal">
+          <div class="goal-head">
+            <label class="tick"><input type="checkbox" data-id="g3"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do"><span class="goal-n">Goal 3</span><span class="goal-t">Make it a real website</span></span></label>
+          </div>
+          <div class="goal-body">
+            <div class="prompt"><q>How do I turn my GitHub repository into a website using GitHub Pages? One step at a time, and tell me what my web address will be.</q><button class="copy" type="button" aria-label="Copy this"><svg><use href="#ic-copy"/></svg></button></div>
+            <p style="margin-top:12px">When it's live you'll have an address ending in <strong>github.io</strong>. That's yours. Nobody gave it to you. You made it.</p>
+            <div class="goal-done"><b>Done when</b>Pete can open your page on his phone.</div>
+          </div>
+        </div>
+
+        <div class="tick-list" style="margin-top:12px">
+          <label class="tick"><input type="checkbox" data-id="g4"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Text Pete the address.</span></label>
+          <label class="tick"><input type="checkbox" data-id="g5"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Three lines in the log for each goal, if you can. What you did, how, what you learned.</span></label>
+        </div>
+      </div>
+      <div class="side">
+        <div class="done">
+          <div class="done-lbl"><svg><use href="#ic-check"/></svg>Done when</div>
+          <p>There's a web page on the internet with your name on it, and Pete's seen it.</p>
+        </div>
+        <div class="tip">
+          <div class="tip-lbl">When Claude loses you</div>
+          <p>Screenshot the bit you're stuck on with <strong>Windows, Shift, S</strong>. Paste it into Claude with <strong>Ctrl, V</strong>. Then ask: <strong>"What does this mean and what do I click?"</strong></p>
+        </div>
+        <div class="tip">
+          <div class="tip-lbl">Why this one</div>
+          <p>It's a real thing at a real address. Later, if you want, it turns into a page about what you do for work. Not now. Now it's just yours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── STUCK ───────────────────────── -->
+<section class="mode mode-l" id="stuck">
+  <div class="inner">
+    <div class="mode-head">
+      <div class="mode-eyebrow">
+        <div class="me-icon"><svg><use href="#ic-buoy"/></svg></div>
+        <div class="me-essence">stopping counts as doing something</div>
+        <div class="me-right"><button class="speak" type="button"><svg><use href="#ic-speaker"/></svg>Read this bit</button></div>
+      </div>
+      <h2 class="mode-name">When you're stuck</h2>
+      <p class="mode-line">You will get stuck. Everyone does, including me, most days. <strong>Stuck isn't a sign you're not cut out for this. It's just where the next bit of learning is sitting.</strong></p>
+      <p class="mode-line">One section per sitting is plenty. This isn't a race and there's no prize for doing it all in one night.</p>
+    </div>
+    <div class="mode-body even">
+      <div>
+        <div class="col-label"><span class="cl-dot"></span>In this order</div>
+        <ol class="steps">
+          <li class="step"><div>Fifteen minutes is the limit.<small>After fifteen minutes of it not working, stop pushing. Past that is where laptops get thrown.</small></div></li>
+          <li class="step"><div>Screenshot it. Paste it into Claude.<small>"What does this mean and what do I do?" It has seen every error message ever written.</small></div></li>
+          <li class="step"><div>Still stuck: text Pete the screenshot.<small>Just the picture. No essay needed. Or save it for the call, if it can wait.</small></div></li>
+          <li class="step"><div>Then leave it. Come back tomorrow.<small>It'll still be there and you'll be fresher. Stopping counts as doing something.</small></div></li>
+        </ol>
+      </div>
+      <div class="side">
+        <div class="tip">
+          <div class="tip-lbl">Nothing here can be broken</div>
+          <p>Not properly. <strong>Accounts get recovered, laptops get reset, pages get deleted and made again.</strong> Worst case on this page is a wasted afternoon, and you've had those before.</p>
+        </div>
+        <div class="tip">
+          <div class="tip-lbl">The other page</div>
+          <p>The <a href="selfdriven-you-russ.html#numbers">numbers on your other page</a> still stand, for anything that isn't about computers.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── SHOW AND TELL ───────────────────────── -->
+<section class="mode mode-k alt" id="show" data-stage="Show and tell">
+  <div class="inner">
+    <div class="mode-head">
+      <div class="mode-eyebrow">
+        <div class="me-icon"><svg><use href="#ic-mic"/></svg></div>
+        <div class="me-essence">ten minutes, three two one</div>
+        <div class="me-right"><div class="me-step">Week three</div><button class="speak" type="button"><svg><use href="#ic-speaker"/></svg>Read this bit</button></div>
+      </div>
+      <h2 class="mode-name">Show and tell</h2>
+      <p class="mode-line">Open your log and talk me through it in three-two-one: <strong>three things you did, two things you learned, one thing you want to do next.</strong> Ten minutes, then I ask questions.</p>
+      <p class="mode-line">Nothing to write and nothing to read out. You'll have said all of it before, on the calls. There are no wrong answers, and "it was annoying" is a legitimate thing you learned.</p>
+    </div>
+    <div class="mode-body">
+      <div>
+        <div class="col-label"><span class="cl-dot"></span>Do these<span class="cnt"></span></div>
+        <div class="tick-list">
+          <label class="tick"><input type="checkbox" data-id="s1"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">From the log, pick <strong>three things you did</strong>.<small>Big or small. "Made an email address" is a thing you did.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="s2"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Pick <strong>two things you learned</strong>.<small>About computers, about Claude, or about yourself. Any of those.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="s3"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Pick <strong>one thing you want to do next</strong>.<small>Anything. A page for something you're into, sorting a CV, learning something, fixing the car. This becomes the next planning session.</small></span></label>
+          <label class="tick"><input type="checkbox" data-id="s4"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Practise it once, out loud, to Claude.<div class="prompt"><q>I'm telling my brother what I did, in three things I did, two things I learned, one thing I want next. Here's my log. Help me pick them, then ask me the questions he might ask.</q><button class="copy" type="button" aria-label="Copy this"><svg><use href="#ic-copy"/></svg></button></div></span></label>
+          <label class="tick"><input type="checkbox" data-id="s5"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Turn up on the day. Bring the laptop. Show me the page you made.</span></label>
+          <label class="tick"><input type="checkbox" data-id="s6"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Get paid. Get the shirt.</span></label>
+          <label class="tick"><input type="checkbox" data-id="s7"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Look at the future fund together, then pick the next date before you leave.</span></label>
+        </div>
+      </div>
+      <div class="side">
+        <div class="done">
+          <div class="done-lbl"><svg><use href="#ic-check"/></svg>Done when</div>
+          <p>You've got the money, the shirt, and a date. Then this page is finished and we start the next one.</p>
+        </div>
+        <div class="tip">
+          <div class="tip-lbl">Three, two, one</div>
+          <p>It's a container. <strong>You can't ramble and you can't run out.</strong> Pete uses the same one in meetings with people who pay him.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── PETE'S SIDE ───────────────────────── -->
+<section class="mode mode-b" id="pete" data-stage="Pete's side">
+  <div class="inner">
+    <div class="mode-head">
+      <div class="mode-eyebrow">
+        <div class="me-icon"><svg><use href="#ic-shield"/></svg></div>
+        <div class="me-essence">so you can hold me to it</div>
+        <div class="me-right"><button class="speak" type="button"><svg><use href="#ic-speaker"/></svg>Read this bit</button></div>
+      </div>
+      <h2 class="mode-name">Pete's side</h2>
+      <p class="mode-line">Fair's fair. <strong>Here's what I'm on the hook for.</strong> Tick these off as I do them, and give me grief if I'm behind.</p>
+    </div>
+    <div class="mode-body">
+      <div>
+        <div class="col-label"><span class="cl-dot"></span>Pete does these<span class="cnt"></span></div>
+        <div class="tick-list">
+          <label class="tick"><input type="checkbox" data-id="pe1"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">A phone with a working SIM and a new number, and the laptop.</span></label>
+          <label class="tick"><input type="checkbox" data-id="pe2"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Fill in the date and the amount on this page, and say them out loud so we've both heard them.</span></label>
+          <label class="tick"><input type="checkbox" data-id="pe3"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Set up the daily Meet link and send it once, so it's the same one every time.</span></label>
+          <label class="tick"><input type="checkbox" data-id="pe4"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Be the recovery email on the Google account, and answer if it pings me.</span></label>
+          <label class="tick"><input type="checkbox" data-id="pe5"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Transfer three months of the Claude subscription before Russ signs up, and every three months after.</span></label>
+          <label class="tick"><input type="checkbox" data-id="pe6"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Pay on payday, every week, without being chased.</span></label>
+          <label class="tick"><input type="checkbox" data-id="pe7"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Open the investment account with Russ, in his name, and show him the balance each week.</span></label>
+          <label class="tick"><input type="checkbox" data-id="pe8"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Sort out the Centrelink side with him, properly, before the first payment.</span></label>
+          <label class="tick"><input type="checkbox" data-id="pe9"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Answer texts with screenshots in them, the same day.</span></label>
+          <label class="tick"><input type="checkbox" data-id="pe10"><span class="box"><svg><use href="#ic-check"/></svg></span><span class="tick-do">Order the shirt so it's ready on the day, and book the next planning session before he leaves.</span></label>
+        </div>
+      </div>
+      <div class="side">
+        <div class="tip">
+          <div class="tip-lbl">Before day one, Pete checks</div>
+          <p><strong>The SIM is active. The debit card works for online payments. The investment account is open.</strong> Any one of those missing stalls a week, so sort them first.</p>
+        </div>
+        <div class="tip">
+          <div class="tip-lbl">On the calls</div>
+          <p>Ask what he did, not whether he finished. <strong>Ten minutes, then get off.</strong> A short call every day beats a long one on Sunday.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="gblob gb1"></div><div class="gblob gb4"></div>
+  <div class="closing-inner">
+    <h2>That's the first go.</h2>
+    <p>No streak. Three weeks, one date at the end, and if we miss it we pick another one.</p>
+    <p>Everything on this page can be done badly and still count. Doing it is the point. Doing it well turns up later on its own, without anyone trying.</p>
+    <div class="sig">Love ya, mate.<br>Pete</div>
+    <div class="closing-btns">
+      <a href="#top" class="btn-primary">Back to the top</a>
+      <a href="selfdriven-you-russ.html" class="btn-ghost">One small thing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="https://selfdriven.you/" class="foot-logo"><img src="../assets/img/selfdriven-you-logo-round-4colour-blend.png" alt="selfdriven.you"><span style="margin-left:6px">selfdriven<em>.you</em></span></a>
+  <div class="foot-tag">Curious · Caring · Constructive · Chill</div>
+  <div class="foot-tag">A human rhythm for the age of intelligence.</div>
+  <div class="foot-divider"></div>
+  <div class="foot-initiative">An initiative of the <a href="https://selfdriven.foundation" target="_blank" rel="noopener">selfdriven Foundation</a></div>
+</footer>
+
+<script>
+// custom cursor
+(function(){
+  var dot=document.getElementById('cdot'),ring=document.getElementById('cring');
+  if(!dot||!ring) return;
+  var rx=0,ry=0,dx=0,dy=0;
+  document.addEventListener('mousemove',function(e){
+    dx=e.clientX;dy=e.clientY;
+    dot.style.left=dx+'px';dot.style.top=dy+'px';
+  });
+  function loop(){
+    rx+=(dx-rx)*.18;ry+=(dy-ry)*.18;
+    ring.style.left=rx+'px';ring.style.top=ry+'px';
+    requestAnimationFrame(loop);
+  }
+  loop();
+  document.querySelectorAll('a,button,.tick,.deal,.week').forEach(function(el){
+    el.addEventListener('mouseenter',function(){
+      ring.style.width='52px';ring.style.height='52px';ring.style.borderColor='rgba(255,95,126,.6)';
+    });
+    el.addEventListener('mouseleave',function(){
+      ring.style.width='34px';ring.style.height='34px';ring.style.borderColor='rgba(240,238,255,.3)';
+    });
+  });
+})();
+
+// nav-logo bouncing dots
+(function(){
+  var dots=document.querySelector('.nav-logo .markdots');
+  if(!dots) return;
+  function wave(){ dots.classList.remove('wave'); void dots.offsetWidth; dots.classList.add('wave'); }
+  dots.parentElement.addEventListener('mouseenter',wave);
+  setTimeout(wave,900);
+})();
+
+// bigger text, remembered
+(function(){
+  var KEY='sdy-russ-easy', btn=document.getElementById('easyToggle');
+  function apply(on){
+    document.body.classList.toggle('easy',on);
+    btn.setAttribute('aria-pressed',on?'true':'false');
+    btn.lastChild.textContent=on?'Normal text':'Bigger text';
+  }
+  var saved=null; try{ saved=localStorage.getItem(KEY) }catch(e){}
+  apply(saved==='1');
+  btn.addEventListener('click',function(){
+    var on=!document.body.classList.contains('easy');
+    apply(on); try{ localStorage.setItem(KEY,on?'1':'0') }catch(e){}
+  });
+})();
+
+// read aloud
+(function(){
+  var synth=window.speechSynthesis;
+  var readAll=document.getElementById('readAll');
+  var speakBtns=Array.prototype.slice.call(document.querySelectorAll('.speak'));
+  if(!synth||typeof SpeechSynthesisUtterance==='undefined'){
+    if(readAll) readAll.style.display='none';
+    speakBtns.forEach(function(b){ b.style.display='none' });
+    return;
+  }
+  var current=null;
+
+  function pickVoice(){
+    var vs=synth.getVoices()||[];
+    return vs.filter(function(v){return /en[-_]AU/i.test(v.lang)})[0]
+        || vs.filter(function(v){return /en[-_]GB/i.test(v.lang)})[0]
+        || vs.filter(function(v){return /^en/i.test(v.lang)})[0] || null;
+  }
+
+  function textOf(sec){
+    var bits=[];
+    var h=sec.querySelector('.mode-name'); if(h) bits.push(h.textContent.trim()+'.');
+    sec.querySelectorAll('.mode-line').forEach(function(p){ bits.push(p.textContent.trim()) });
+    sec.querySelectorAll('.deal').forEach(function(d){
+      var k=d.querySelector('.deal-k'),v=d.querySelector('.deal-v'),p=d.querySelector('p');
+      bits.push((k?k.textContent.trim()+'. ':'')+(v?v.textContent.trim()+'. ':'')+(p?p.textContent.trim():''));
+    });
+    sec.querySelectorAll('.week').forEach(function(w){ bits.push(w.textContent.replace(/\s+/g,' ').trim()) });
+    var dn=sec.querySelector('.deal-note'); if(dn) bits.push(dn.textContent.trim());
+    sec.querySelectorAll('.goal').forEach(function(g){
+      var t=g.querySelector('.goal-t'); if(t) bits.push(t.textContent.trim()+'.');
+      g.querySelectorAll('.goal-body p,.goal-done').forEach(function(p){ bits.push(p.textContent.trim()) });
+      g.querySelectorAll('.prompt q').forEach(function(q){ bits.push('Say this to Claude. '+q.textContent.trim()) });
+    });
+    sec.querySelectorAll('.tick').forEach(function(t){
+      if(t.closest('.goal-head')) return;
+      var d=t.querySelector('.tick-do'); if(!d) return;
+      var clone=d.cloneNode(true);
+      clone.querySelectorAll('.prompt').forEach(function(p){ p.remove() });
+      bits.push(clone.textContent.replace(/\s+/g,' ').trim());
+      d.querySelectorAll('.prompt q').forEach(function(q){ bits.push('Say this to Claude. '+q.textContent.trim()) });
+    });
+    sec.querySelectorAll('.step div').forEach(function(s){ bits.push(s.textContent.replace(/\s+/g,' ').trim()) });
+    sec.querySelectorAll('.done p').forEach(function(p){ bits.push('Done when. '+p.textContent.trim()) });
+    sec.querySelectorAll('.tip').forEach(function(t){
+      var l=t.querySelector('.tip-lbl'),p=t.querySelector('p');
+      bits.push((l?l.textContent.trim()+'. ':'')+(p?p.textContent.trim():''));
+    });
+    return bits.filter(Boolean).join(' ').replace(/\s+/g,' ');
+  }
+
+  function reset(){
+    speakBtns.forEach(function(b){ b.classList.remove('on'); b.lastChild.textContent='Read this bit'; });
+    readAll.lastChild.textContent='Read this to me';
+    readAll.querySelector('use').setAttribute('href','#ic-speaker');
+    current=null;
+  }
+  function stop(){ try{ synth.cancel() }catch(e){} reset(); }
+
+  function speak(text,btn,label){
+    if(current===btn){ stop(); return; }
+    stop();
+    if(!text) return;
+    var chunks=text.match(/[^.!?]+[.!?]*/g)||[text];
+    var groups=[],buf='';
+    chunks.forEach(function(c){
+      if((buf+c).length>200){ if(buf) groups.push(buf); buf=c; } else buf+=c;
+    });
+    if(buf) groups.push(buf);
+    var voice=pickVoice(), i=0;
+    function next(){
+      if(i>=groups.length){ reset(); return; }
+      var u=new SpeechSynthesisUtterance(groups[i++]);
+      if(voice) u.voice=voice;
+      u.lang='en-AU'; u.rate=.95; u.pitch=1;
+      u.onend=next;
+      u.onerror=function(){ reset(); };
+      synth.speak(u);
+    }
+    current=btn;
+    btn.classList.add('on');
+    btn.lastChild.textContent=label;
+    next();
+  }
+
+  speakBtns.forEach(function(btn){
+    var sec=btn.closest('section');
+    btn.addEventListener('click',function(){ speak(textOf(sec),btn,'Stop'); });
+  });
+
+  readAll.addEventListener('click',function(){
+    if(current===readAll){ stop(); return; }
+    var all=[];
+    document.querySelectorAll('section.mode').forEach(function(s){ all.push(textOf(s)) });
+    readAll.querySelector('use').setAttribute('href','#ic-stop');
+    speak(all.join(' '),readAll,'Stop reading');
+  });
+
+  window.addEventListener('beforeunload',function(){ try{ synth.cancel() }catch(e){} });
+  if(synth.onvoiceschanged!==undefined){ synth.onvoiceschanged=function(){}; }
+})();
+
+// scroll reveal
+(function(){
+  var els=document.querySelectorAll('.mode-head,.tick,.goal,.deal,.week,.step,.done,.tip,.closing-inner,.deal-note');
+  els.forEach(function(el){el.classList.add('reveal')});
+  if(!('IntersectionObserver' in window)){ els.forEach(function(el){el.classList.add('vis')}); return; }
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target); } });
+  },{threshold:.06,rootMargin:'0px 0px -5% 0px'});
+  els.forEach(function(el){io.observe(el)});
+})();
+
+// ticks: save, count, copy, print, reset
+(function(){
+  var KEY='sdy-russ-start-v1';
+  function store(v){ try{ localStorage.setItem(KEY,JSON.stringify(v)) }catch(e){} }
+  function load(){ try{ return JSON.parse(localStorage.getItem(KEY)||'{}')||{} }catch(e){ return {} } }
+
+  var boxes=Array.prototype.slice.call(document.querySelectorAll('.tick input[type=checkbox][data-id]'));
+  var state=load();
+  boxes.forEach(function(b){ if(state[b.dataset.id]) b.checked=true; });
+
+  var pgDone=document.getElementById('pgDone'),pgTotal=document.getElementById('pgTotal'),pgFill=document.getElementById('pgFill');
+
+  function stages(){
+    var out=[];
+    document.querySelectorAll('section[data-stage]').forEach(function(sec){
+      var bs=sec.querySelectorAll('.tick input[type=checkbox][data-id]');
+      var done=0; bs.forEach(function(b){ if(b.checked) done++; });
+      out.push({name:sec.dataset.stage,done:done,total:bs.length,sec:sec});
+    });
+    return out;
+  }
+  function refresh(){
+    var done=0; boxes.forEach(function(b){ if(b.checked) done++; });
+    pgDone.textContent=done; pgTotal.textContent=boxes.length;
+    pgFill.style.width=(boxes.length?Math.round(done/boxes.length*100):0)+'%';
+    stages().forEach(function(s){
+      var c=s.sec.querySelector('.col-label .cnt');
+      if(c) c.textContent=s.done+' of '+s.total;
+    });
+  }
+  boxes.forEach(function(b){
+    b.addEventListener('change',function(){
+      state[b.dataset.id]=b.checked?1:0; store(state); refresh();
+    });
+  });
+  refresh();
+
+  var out=document.getElementById('pgOut');
+  function progressText(){
+    var d=new Date(), ds=d.toLocaleDateString('en-AU',{day:'numeric',month:'short',year:'numeric'});
+    var done=0; boxes.forEach(function(b){ if(b.checked) done++; });
+    var lines=['Have a go. Where I am up to, '+ds,'Ticked '+done+' of '+boxes.length,''];
+    stages().forEach(function(s){ lines.push((s.done===s.total&&s.total?'[x] ':'[ ] ')+s.name+': '+s.done+' of '+s.total); });
+    var date=document.getElementById('dealDate').textContent.trim();
+    lines.push(''); lines.push('Show and tell: '+date);
+    return lines.join('\n');
+  }
+  function flash(btn,label){
+    var old=btn.innerHTML; btn.innerHTML='<svg><use href="#ic-check"/></svg>'+label;
+    setTimeout(function(){ btn.innerHTML=old; },1800);
+  }
+  document.getElementById('copyProgress').addEventListener('click',function(){
+    var btn=this, txt=progressText();
+    out.value=txt;
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){ flash(btn,'Copied. Paste it anywhere.'); out.classList.remove('on'); },
+        function(){ out.classList.add('on'); out.focus(); out.select(); });
+    } else { out.classList.add('on'); out.focus(); out.select(); }
+  });
+
+  document.getElementById('printPage').addEventListener('click',function(){ window.print(); });
+
+  var rb=document.getElementById('resetTicks'), armed=false, t;
+  rb.addEventListener('click',function(){
+    if(!armed){ armed=true; rb.classList.add('arm'); rb.lastChild.textContent='Tap again to clear every tick';
+      t=setTimeout(function(){ armed=false; rb.classList.remove('arm'); rb.lastChild.textContent='Start over'; },3500); return; }
+    clearTimeout(t); armed=false; rb.classList.remove('arm'); rb.lastChild.textContent='Start over';
+    state={}; store(state); boxes.forEach(function(b){ b.checked=false; }); refresh(); out.classList.remove('on');
+  });
+})();
+
+// copy buttons on prompts
+(function(){
+  function selectText(el){
+    if(!el) return; var r=document.createRange(); r.selectNodeContents(el);
+    var s=window.getSelection(); s.removeAllRanges(); s.addRange(r);
+  }
+  document.querySelectorAll('.prompt .copy').forEach(function(btn){
+    btn.addEventListener('click',function(e){
+      e.preventDefault(); e.stopPropagation();
+      var q=btn.parentElement.querySelector('q'); var txt=q?q.textContent.trim():'';
+      function did(){ btn.classList.add('did'); btn.innerHTML='<svg><use href="#ic-check"/></svg>';
+        setTimeout(function(){ btn.classList.remove('did'); btn.innerHTML='<svg><use href="#ic-copy"/></svg>'; },1500); }
+      if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(did,function(){ selectText(q); }); }
+      else selectText(q);
+    });
+  });
+  document.querySelectorAll('.prompt').forEach(function(p){
+    p.addEventListener('click',function(e){ e.preventDefault(); e.stopPropagation(); });
+  });
+})();
+
+// nav height for anchor offset
+(function(){
+  var nav=document.querySelector('nav');
+  function navh(){ if(nav) document.documentElement.style.setProperty('--navh',nav.offsetHeight+'px'); }
+  navh(); window.addEventListener('resize',navh);
+  document.querySelectorAll('section[id]').forEach(function(s){ s.style.scrollMarginTop='calc(var(--navh,62px) + 8px)'; });
+})();
+</script>
+</body>
+</html>
