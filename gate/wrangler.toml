@@ -9,7 +9,7 @@ compatibility_date = "2026-09-01"
 
 [vars]
 # The vault repo, through the GitHub Contents API. Must be a PRIVATE repo.
-REPO_BASE  = "https://api.github.com/repos/selfdriven-peter/lab/contents/docs/pages"
+REPO_BASE  = "https://api.github.com/repos/selfdriven-peter/lab/contents/vault"
 
 # Shown in the browser tab on the gate screen.
 GATE_TITLE = "Pete | Secure pages"

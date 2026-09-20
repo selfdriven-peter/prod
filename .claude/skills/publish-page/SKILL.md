@@ -12,7 +12,7 @@ Two repos, one index.
 | | Repo | Visibility | Holds |
 |---|---|---|---|
 | Shelf | `prod` | **public** | `docs/index.html`, `docs/pages/*.html` |
-| Vault | `lab` | **private** | `docs/pages/<code>-<key>/<key>-*.html` |
+| Vault | `lab` | **private** | `vault/<code>-<key>/<key>-*.html` |
 
 **The page is the source of truth. The catalogue is derived.** Each page
 declares itself in its own `<head>`; `tools/catalogue.py` scans both repos and
@@ -27,7 +27,7 @@ in `lab` is only reachable through the gate, after a password.
 
 Read `catalogue.json` for the groups, the vault path and the gate URL. Never
 hardcode the access code or the vault folder name — read them from the
-filesystem (`ls ../lab/docs/pages`) so a rotated code just works.
+filesystem (`ls ../lab/vault`) so a rotated code just works.
 
 ## Publishing a page
 
@@ -51,7 +51,7 @@ Ask only what you cannot infer from the request or the content:
   It is a permanent URL — the site's whole promise is that links keep working.
   **Never rename or move an existing public page.** If a name is genuinely
   wrong, add the new one and leave a redirect stub at the old path.
-- **Locked** → `../lab/docs/pages/<code>-<key>/<key>-<slug>.html`. The
+- **Locked** → `../lab/vault/<code>-<key>/<key>-<slug>.html`. The
   `<key>-` prefix is mandatory; the gate resolves the folder from it, so a file
   without it is invisible. `catalogue.py --list` warns about this.
 
@@ -93,10 +93,10 @@ was about the work, not about this page's contents.
 
 ```bash
 git -C . add -A && git commit && git push                      # prod
-git -C ../lab add docs/pages && git commit && git push          # lab
+git -C ../lab add vault && git commit && git push               # lab
 ```
 
-In `lab`, **only ever stage `docs/pages`**. That repo has unrelated work in
+In `lab`, **only ever stage `vault`**. That repo has unrelated work in
 progress and sweeping it up with `git add -A` would commit things the person
 did not mean to commit.
 
@@ -120,7 +120,7 @@ practice.
 for anyone holding the link.
 
 **A new person with their own password.** New folder
-`../lab/docs/pages/<new-8-char-code>-<name>/`, files prefixed `<name>-`. Then
+`../lab/vault/<new-8-char-code>-<name>/`, files prefixed `<name>-`. Then
 the `PROJECTS` secret must be updated — that needs the person to run
 `cd gate && npx wrangler secret put PROJECTS` themselves with every project in
 one JSON line. Give them the exact line to paste.
@@ -132,7 +132,7 @@ appears automatically and stays hidden while empty.
 
 - Never put a page meant to be private in `prod`. Check twice.
 - Never paste the access code into anything in `prod` — it is public. It lives
-  in the vault folder name and in `lab/docs/pages/README.md`.
+  in the vault folder name and in `lab/vault/README.md`.
 - Never hand-edit `docs/data/catalogue.js`.
 - Never rename or delete an existing public page without saying the links break.
 - Never `git add -A` in `lab`.

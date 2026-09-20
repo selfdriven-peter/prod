@@ -1,25 +1,35 @@
 {
   "_comment": "Input config for tools/catalogue.py. Pages declare themselves in their own <head>; this file only says what the groups are and where to look.",
-
   "groups": [
-    { "id": "selfdriven", "label": "selfdriven", "tone": "chill",        "order": 10 },
-    { "id": "other",      "label": "Other",      "tone": "gold",         "order": 20 },
-    { "id": "vault",      "label": "Vault",      "tone": "constructive", "order": 30 }
+    {
+      "id": "selfdriven",
+      "label": "selfdriven",
+      "tone": "chill",
+      "order": 10
+    },
+    {
+      "id": "other",
+      "label": "Other",
+      "tone": "gold",
+      "order": 20
+    },
+    {
+      "id": "vault",
+      "label": "Vault",
+      "tone": "constructive",
+      "order": 30
+    }
   ],
-
   "public": {
     "pages_dir": "docs/pages",
     "href_prefix": "pages/"
   },
-
   "vault": {
     "repo_path": "../lab",
-    "pages_dir": "docs/pages",
+    "pages_dir": "vault",
     "group": "vault"
   },
-
   "gate_url": "https://pages-gate.selfdriven-peter.workers.dev",
-
   "defaults": {
     "icon": "ic-page",
     "cta": "Open it",

@@ -31,8 +31,9 @@ window.CATALOGUE = {
       "line": "Pick a state of mind, ask a question, shake the ball.",
       "cta": "Ask the ball",
       "order": 10,
-      "href": "pages/selfdriven-8-ball.html",
-      "locked": false
+      "locked": true,
+      "page": "peter-8-ball",
+      "owner": "peter"
     },
     {
       "title": "Have a go",
@@ -43,8 +44,9 @@ window.CATALOGUE = {
       "line": "Week one, a day at a time. Five syncs, four things a day, and the 4Cs.",
       "cta": "Open week one",
       "order": 20,
-      "href": "pages/selfdriven-you-russ-start.html",
-      "locked": false
+      "locked": true,
+      "page": "russ-have-a-go",
+      "owner": "russ"
     },
     {
       "title": "If I can change",
@@ -55,8 +57,9 @@ window.CATALOGUE = {
       "line": "Four gears, a morning script, and a wall you build one brick a day.",
       "cta": "Read it",
       "order": 30,
-      "href": "pages/selfdriven-you-russ-if-i-can.html",
-      "locked": false
+      "locked": true,
+      "page": "russ-if-i-can",
+      "owner": "russ"
     },
     {
       "title": "Poker Night",
@@ -67,8 +70,9 @@ window.CATALOGUE = {
       "line": "The where, the when, the buy-in and the house rules.",
       "cta": "Deal me in",
       "order": 10,
-      "href": "pages/poker-night.html",
-      "locked": false
+      "locked": true,
+      "page": "peter-poker-night",
+      "owner": "peter"
     },
     {
       "title": "It works",
@@ -80,7 +84,8 @@ window.CATALOGUE = {
       "cta": "Unlock",
       "order": 10,
       "locked": true,
-      "page": "peter-welcome"
+      "page": "peter-welcome",
+      "owner": "peter"
     }
   ]
 };

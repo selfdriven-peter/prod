@@ -49,13 +49,13 @@ Secrets (`npx wrangler secret put <NAME>`):
 | Name | Value |
 |---|---|
 | `GH_TOKEN` | Fine-grained PAT, read-only Contents, vault repo only |
-| `PROJECTS` | `{"peter":{"code":"<CODE>","passwords":["<CODE>"]}}` |
+| `PROJECTS` | `{"peter":{...},"russ":{...}}` — one entry per person |
 
 Vars (`wrangler.toml`, not secret):
 
 | Name | Value |
 |---|---|
-| `REPO_BASE` | `https://api.github.com/repos/selfdriven-peter/lab/contents/docs/pages` |
+| `REPO_BASE` | `https://api.github.com/repos/selfdriven-peter/lab/contents/vault` |
 | `GATE_TITLE` | Browser tab title |
 | `GATE_URL` | This Worker's public origin, used for link rewriting |
 
@@ -96,6 +96,6 @@ npx wrangler tail     # live logs
 |---|---|
 | "Gate is not configured" | `GH_TOKEN` or `PROJECTS` secret missing |
 | "Unknown page" on a name you know is right | page name has no hyphen, or the prefix isn't a key in `PROJECTS` |
-| "Page not found" | file isn't at `docs/pages/<code>-<key>/<page>.html` in the vault, or isn't pushed |
+| "Page not found" | file isn't at `vault/<code>-<key>/<page>.html` in the vault, or isn't pushed |
 | "Could not retrieve page" | token expired, revoked, or lacks Contents read on the vault repo |
 | Links inside a page go nowhere | `GATE_URL` in `wrangler.toml` doesn't match the deployed URL |

@@ -82,6 +82,8 @@ def first_sentence(text, limit=110):
 def parse_page(path, defaults):
     head = read_head(path)
     meta = {m.group("key").lower(): m.group("val").strip() for m in META_RE.finditer(head)}
+    if "skip" in meta:
+        return None  # redirect stub, draft, or anything else not for the index
 
     title_m = TITLE_RE.search(head)
     desc_m = DESC_RE.search(head)
@@ -121,6 +123,8 @@ def collect(cfg):
         if not name.endswith(".html"):
             continue
         page = parse_page(os.path.join(pub_dir, name), defaults)
+        if page is None:
+            continue
         if not page["group"]:
             page["group"] = "other"
             warnings.append('%s has no sd:group — filed under "other"' % name)
@@ -160,10 +164,20 @@ def collect(cfg):
                     )
                     continue
                 page = parse_page(os.path.join(fpath, name), defaults)
-                page["group"] = vault_group
-                page["tone"] = page["tone"] or group_tone.get(vault_group, "constructive")
+                if page is None:
+                    continue
+                # grouping is orthogonal to locking: a vault page can sit under
+                # any tab. Only the padlock says where it lives.
+                if page["group"] not in group_ids:
+                    if page["group"]:
+                        warnings.append(
+                            '%s/%s declares group "%s", which is not in catalogue.json'
+                            % (folder, name, page["group"]))
+                    page["group"] = vault_group
+                page["tone"] = page["tone"] or group_tone.get(page["group"], "constructive")
                 page["locked"] = True
                 page["page"] = page["stem"]
+                page["owner"] = key
                 page["cta"] = page["cta"] if page["_annotated"] else "Unlock"
                 sites.append(page)
     else:

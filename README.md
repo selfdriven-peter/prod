@@ -41,16 +41,16 @@ value is not in this repo** — this README is public, so putting the live
 password in it would defeat the point. You'll find it in the private vault at:
 
 ```
-lab/docs/pages/README.md
+lab/vault/README.md
 ```
 
-It's also the name of the folder in `lab/docs/pages/`. Wherever you see
+It's also the name of the folder in `lab/vault/`. Wherever you see
 `<CODE>` below, substitute that string.
 
 That one string is both the folder name and the password.
 
 ```
-lab/docs/pages/<CODE>-peter/peter-welcome.html
+lab/vault/<CODE>-peter/peter-welcome.html
                └───┬────┘ └┬─┘ └──┬───┘
                    │       │      └── page name — always starts with "peter-"
                    │       └───────── project key
@@ -191,7 +191,7 @@ offers to push. That's the whole job.
 
 **A private page** — password required:
 
-1. Copy the template to `lab/docs/pages/<CODE>-peter/peter-my-thing.html`.
+1. Copy the template to `lab/vault/<CODE>-peter/peter-my-thing.html`.
    The `peter-` prefix is what makes the gate find it.
 2. Fill in the `sd:` tags, with `sd:group` set to `vault`.
 3. `python3 tools/catalogue.py`
@@ -217,7 +217,7 @@ matters — a page in the **public** repo claiming to be in the vault.
 No. **One folder is one password, holding as many pages as you like.**
 
 ```
-lab/docs/pages/<CODE>-peter/     ← one folder, one password
+lab/vault/<CODE>-peter/          ← one folder, one password
     peter-welcome.html
     peter-plan.html
     peter-anything-else.html     ← just keep adding files
@@ -227,7 +227,7 @@ You only add a second folder when you want a **different password for a
 different person**:
 
 ```
-lab/docs/pages/<other-code>-russ/
+lab/vault/<other-code>-russ/
     russ-something.html          ← Russ's password, not yours
 ```
 
@@ -293,10 +293,13 @@ prod/                                  PUBLIC
     └── wrangler.toml                  settings, no secrets
 
 lab/                                   PRIVATE
-└── docs/pages/
-    ├── README.md                      the conventions (and the real code)
-    └── <CODE>-peter/                  the vault — one folder, one password
-        └── peter-*.html
+├── COMMANDS.md                        every command, copy-paste, in order
+├── vault/                             the gated pages — one folder per person
+│   ├── README.md                      the conventions (and the real codes)
+│   ├── <CODE>-peter/peter-*.html
+│   └── <CODE>-russ/russ-*.html
+└── workings/                          everything else — notes, drafts, research
+                                       (nothing here is served by anything)
 ```
 
 **Why pages stay flat and are never renamed.** The whole point of the site is
