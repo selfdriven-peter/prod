@@ -251,6 +251,32 @@ main{padding:30px 26px 40px}
 .bump button.plus:hover{background:var(--felt);border-color:var(--felt);color:#04140C}
 .bump button:disabled{opacity:.3;cursor:not-allowed}
 .wins{font-family:var(--display);font-size:22px;line-height:1;color:var(--gold)}
+
+/* ---------- a player's nights, on a click of their name ---------- */
+.who{color:var(--cream);border-bottom:1px dotted var(--line-2);padding-bottom:1px;transition:all .15s}
+.who:hover{color:var(--felt-hi);border-bottom-color:var(--felt-hi)}
+.sheet{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:18px}
+.sheet[hidden]{display:none}
+.sheet-bg{position:absolute;inset:0;background:rgba(6,8,7,.78);backdrop-filter:blur(3px)}
+.sheet-card{
+  position:relative;width:min(460px,100%);max-height:80vh;overflow:auto;
+  background:var(--panel);border:1px solid var(--line-2);border-radius:2px;
+}
+.sheet-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+  padding:16px 18px;border-bottom:1px solid var(--line)}
+.sheet-hd h3{font-family:var(--display);font-size:22px;letter-spacing:.05em;font-weight:400}
+.sheet-hd .c{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.sheet-x{border:1px solid var(--line-2);border-radius:2px;width:28px;height:28px;flex:none;
+  color:var(--muted);font-size:15px;line-height:1;transition:all .15s}
+.sheet-x:hover{border-color:var(--red);color:var(--red)}
+.sheet-bd{padding:6px 18px 18px}
+.nite{padding:14px 0;border-bottom:1px solid var(--line)}
+.nite:last-child{border-bottom:0}
+.nite .g{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.nite .d{font-family:var(--display);font-size:20px;letter-spacing:.04em;margin-top:3px}
+.nite p{font-size:13px;color:var(--muted);margin-top:5px;line-height:1.5}
+.nite .take{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--felt-hi);margin-top:6px}
+.nite.unknown .d{color:var(--faint)}
 .btn-row{display:flex;gap:8px;flex-wrap:wrap}
 button.ghost{
   border:1px solid var(--line-2);padding:9px 14px;border-radius:2px;
@@ -403,7 +429,14 @@ button.ghost:hover{border-color:var(--felt-hi);color:var(--felt-hi);background:v
   color:rgba(255,255,255,.72);min-height:16px;text-align:center;padding:0 8%;
 }
 .board .act b{color:var(--felt-hi)}
-.board .act.win b{color:var(--gold)}
+/* the winning line gets the room it deserves */
+.board .act.win{font-size:15px;letter-spacing:.1em;line-height:1.6;padding:0 20%}
+.board .act.win b{color:var(--gold);font-size:17px}
+@media (max-width:760px){ .board .act.win{font-size:12px} .board .act.win b{font-size:13px} }
+
+/* Seats that were not at the table for this hand. Important beats the
+   seatIn animation, which otherwise keeps them fading themselves back in. */
+.pseat.gone{opacity:0!important;pointer-events:none}
 
 /* the payout line printed on the felt */
 .pay-felt{
@@ -732,6 +765,11 @@ ul.dots li b{color:var(--cream);font-weight:600}
   <div class="ticker-track" id="tick"></div>
 </div>
 
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheet-name">
+  <div class="sheet-bg" data-sheet-close></div>
+  <div class="sheet-card" id="sheet-card"></div>
+</div>
+
 <header class="topbar">
   <div class="topbar-in">
     <div class="brand">
@@ -787,7 +825,7 @@ const WINS = {
   stephen: 2,
   matt:    1,
   scott:   2,
-  jeevan:  2,
+  jeevan:  3,
   damo:    2,
   peter:   1,
   martin:  2,
@@ -829,6 +867,25 @@ const store = {
   get(k, d){ try{ const v = localStorage.getItem("pokernight."+k); return v === null ? d : JSON.parse(v); }catch(e){ return d; } },
   set(k, v){ try{ localStorage.setItem("pokernight."+k, JSON.stringify(v)); }catch(e){} },
 };
+
+/* The chronology. WINS above is the count; this is the story behind it —
+   one entry per night we have a record of, newest last. We are missing the
+   early nights, and that is fine: a player's win count can run ahead of the
+   nights listed here, and the page says so rather than inventing a date.
+   Add a night here whenever one gets played. */
+const NIGHTS = [
+  { game:14, iso:"2026-09-19", winner:"jeevan", second:"peter", pot:450, back:50,
+    field:["peter","stephen","matt","scott","martin","damo","jeevan","vinnie"],
+    note:"Heads-up with Peter. The turn made the boat, the river made Peter second." },
+];
+
+const DATEFMT = { day:"numeric", month:"long", year:"numeric" };
+const nightDate = iso => {
+  const [y, m, d] = iso.split("-").map(Number);
+  return new Date(y, m - 1, d).toLocaleDateString("en-AU", DATEFMT);
+};
+/* every recorded night this player won, newest first */
+const nightsWonBy = id => NIGHTS.filter(n => n.winner === id).sort((a, b) => b.iso.localeCompare(a.iso));
 
 /* Only winners score. One win, one point on the board — nothing else counts.
    WINS above is the truth. Anything recorded on the night is stored as a whole
@@ -894,12 +951,33 @@ const mmss = ms => { const t = Math.max(0, Math.ceil(ms / 1000));
   return String(Math.floor(t / 60)).padStart(2, "0") + ":" + String(t % 60).padStart(2, "0"); };
 
 /* ==========================================================================
-   THE DEMO HAND — three scripted hands that play themselves out on the
+   THE DEMO HAND — scripted hands that play themselves out on the
    Details felt: cards dealt, chips pushed, streets run, showdown, repeat.
-   Every hand is a monster. None of it is real.
+   The first one is real — the hand that ended Game 14, heads-up, Peter
+   against Jeevan. The rest are monsters we made up.
    ========================================================================== */
 const HANDS = [
+  /* Game 14, 19 September 2026. Eight seats — everyone but Kyle and Piet.
+     It came down to Peter and Jeevan with the blinds at $800. The turn
+     quietly made Jeevan a boat; the river paid Peter a second pair he was
+     never going to win with. $450 to Jeevan, Peter's $50 back for second. */
   {
+    label:"Last night · the hand that ended it",
+    hole:{ peter:["K♠","2♣"], jeevan:["K♣","K♦"] },
+    away:["kyle","piet"],
+    dim:["stephen","matt","scott","martin","damo","vinnie"],
+    board:["3♠","8♣","K♥","3♣","2♦"],
+    streets:[
+      { acts:[["peter","calls",800],["jeevan","calls",800]] },
+      { acts:[["peter","bets",2000],["jeevan","calls",2000]] },
+      { acts:[["peter","shoves",6000],["jeevan","calls",6000]] },
+      { acts:[] },
+    ],
+    winner:"jeevan", with:"Full house, kings full of threes",
+    note:"Congrats Jeevs — win #3 🏆 · $450 to Jeevan, Peter takes his $50 back for second",
+  },
+  {
+    madeUp:true,
     hole:{ peter:["A♠","A♥"], stephen:["K♠","K♦"], matt:["Q♥","Q♣"], scott:["A♦","K♣"],
            kyle:["J♠","J♥"], martin:["10♦","10♣"], damo:["A♣","Q♦"], jeevan:["9♠","9♦"],
            vinnie:["K♥","Q♠"], piet:["8♣","8♥"] },
@@ -916,6 +994,7 @@ const HANDS = [
     winner:"kyle", with:"Four of a kind, jacks",
   },
   {
+    madeUp:true,
     hole:{ peter:["K♥","K♠"], stephen:["A♣","A♦"], matt:["J♣","J♦"], scott:["Q♠","Q♥"],
            kyle:["A♠","K♣"], martin:["10♠","10♥"], damo:["9♣","9♥"], jeevan:["A♥","Q♦"],
            vinnie:["K♦","Q♣"], piet:["8♠","8♦"] },
@@ -932,6 +1011,7 @@ const HANDS = [
     winner:"matt", with:"Three of a kind, jacks",
   },
   {
+    madeUp:true,
     hole:{ peter:["Q♦","J♦"], stephen:["A♦","K♦"], matt:["10♠","10♥"], scott:["K♣","K♥"],
            kyle:["J♥","7♥"], martin:["A♠","A♥"], damo:["9♠","9♣"], jeevan:["8♠","8♣"],
            vinnie:["Q♥","J♠"], piet:["7♠","6♠"] },
@@ -1292,7 +1372,7 @@ function boardTab(){
             const n = w[p.id];
             return `<tr>
             <td class="pos">${n && top && n === w[top.id] ? "★" : i + 1}</td>
-            <td>${esc(p.name)}</td>
+            <td><button class="who" data-who="${p.id}" title="See ${esc(p.name.split(" ")[0])}'s nights">${esc(p.name)}</button></td>
             <td class="r"><span class="${n ? "wins" : "zero"}">${n || "—"}</span></td>
             ${editing ? `<td class="r"><div class="bump">
               <button data-win="${p.id}" data-by="-1" aria-label="Take a win off ${esc(p.name)}"${n ? "" : " disabled"}>−</button>
@@ -1568,16 +1648,78 @@ function wire(){
     render();
   }));
 
+  /* leaderboard — a name opens that player's nights */
+  document.querySelectorAll("[data-who]").forEach(b =>
+    b.addEventListener("click", () => openSheet(b.dataset.who)));
+
+}
+
+/* ---------- a player's nights ----------
+   The dated nights come from NIGHTS. Anything the count says they won
+   before we started keeping dates is listed honestly as unrecorded. */
+function openSheet(id){
+  const p = R(id); if(!p) return;
+  const card = $("#sheet-card"), sheet = $("#sheet");
+  if(!card || !sheet) return;
+
+  const wins = winsNow()[id] || 0;
+  const dated = nightsWonBy(id);
+  const undated = Math.max(0, wins - dated.length);
+
+  const nights = dated.map(n => `
+    <div class="nite">
+      <div class="g">Game ${String(n.game).padStart(2, "0")}${n.field ? " · " + n.field.length + " seats" : ""}</div>
+      <div class="d">${nightDate(n.iso)}</div>
+      ${n.note ? `<p>${esc(n.note)}</p>` : ""}
+      ${n.pot ? `<div class="take">Took home ${money(n.pot)}${
+        n.second && R(n.second) ? " · " + esc(R(n.second).name.split(" ")[0]) + " second" : ""}</div>` : ""}
+    </div>`).join("");
+
+  const older = undated ? `
+    <div class="nite unknown">
+      <div class="g">Before we kept dates</div>
+      <div class="d">${undated} night${undated === 1 ? "" : "s"} · date not recorded</div>
+      <p>On the board, just not written down. Add them to NIGHTS if anyone remembers.</p>
+    </div>` : "";
+
+  card.innerHTML = `
+    <div class="sheet-hd">
+      <div>
+        <h3 id="sheet-name">${esc(p.name)}</h3>
+        <div class="c">${wins ? wins + " night" + (wins === 1 ? "" : "s") + " won · " + EVENT.season.toLowerCase() : "no nights won yet"}</div>
+      </div>
+      <button class="sheet-x" data-sheet-close aria-label="Close">✕</button>
+    </div>
+    <div class="sheet-bd">
+      ${nights + older || `<div class="nite unknown"><div class="d">Nothing yet</div>
+        <p>${esc(p.name.split(" ")[0])} is still chasing the first one.</p></div>`}
+    </div>`;
+
+  sheet.hidden = false;
+  card.querySelectorAll("[data-sheet-close]").forEach(b => b.addEventListener("click", closeSheet));
+  const x = card.querySelector(".sheet-x"); if(x) x.focus();
+}
+
+function closeSheet(){
+  const sheet = $("#sheet");
+  if(sheet) sheet.hidden = true;
 }
 
 /* ---------- global ---------- */
 document.addEventListener("click", e => {
+  if(e.target.closest("[data-sheet-close]")){ closeSheet(); return; }
   const b = e.target.closest("[data-tab]");
   if(b) go(b.dataset.tab);
 });
 
 document.addEventListener("keydown", e => {
   if(e.target.matches("input,textarea")) return;
+  /* with a player's nights open, the keys belong to the dialog */
+  const sheet = $("#sheet");
+  if(sheet && !sheet.hidden){
+    if(e.key === "Escape") closeSheet();
+    return;
+  }
   /* on the clock the keys drive the clock, everywhere else they change tab */
   if(tab === "game" && sub === "clock"){
     if(e.key === " "){ e.preventDefault(); clockAct("toggle"); return; }
@@ -1623,7 +1765,11 @@ const potStack = amount => {
 function runDemo(wrap){
   if(window.matchMedia("(prefers-reduced-motion:reduce)").matches) return;
 
-  const H = HANDS[demoHand % HANDS.length];
+  /* only the hands that really happened go on the felt. The made-up ones
+     stay in HANDS for reference; drop `madeUp` from one to put it back in
+     the loop. With a single real hand, that hand plays on repeat. */
+  const reel = HANDS.filter(h => !h.madeUp);
+  const H = (reel.length ? reel : HANDS)[demoHand % (reel.length || HANDS.length)];
   const seats = {};
   wrap.querySelectorAll(".pseat").forEach(el => seats[el.dataset.pid] = el);
   const ids = Object.keys(seats).filter(id => H.hole[id]);
@@ -1670,17 +1816,29 @@ function runDemo(wrap){
   at(t, () => {
     wrap.classList.remove("playing");
     place();
-    ids.forEach(id => { seats[id].classList.remove("fold","won","acting");
-      seats[id].querySelector(".hand").innerHTML = "";
+    Object.keys(seats).forEach(id => { seats[id].classList.remove("fold","won","acting");
+      const hand = seats[id].querySelector(".hand");
+      if(hand) hand.innerHTML = "";
       const ch = seats[id].querySelector(".chip");
-      ch.classList.remove("push"); ch.innerHTML = "";
+      if(ch){ ch.classList.remove("push"); ch.innerHTML = ""; }
     });
+    /* busted earlier in the night: still at the table, out of the hand */
+    (H.dim || []).forEach(id => { if(seats[id]) seats[id].classList.add("fold"); });
+    /* not there at all that night: off the felt entirely */
+    Object.keys(seats).forEach(id => seats[id].classList.remove("gone"));
+    (H.away || []).forEach(id => { if(seats[id]) seats[id].classList.add("gone"); });
     boardEl.innerHTML = ""; potEl.textContent = "$0";
     if(potStk) potStk.innerHTML = ""; say("Shuffling up…");
   });
   t += 700;
   at(t, () => wrap.classList.add("playing"));
   t += 500;
+
+  /* a hand that really happened says so before it deals */
+  if(H.label){
+    at(t, () => say(`<b>${H.label}</b>`));
+    t += 1400;
+  }
 
   /* --- deal, one card at a time round the table, twice --- */
   say("Dealing…");
@@ -1737,7 +1895,11 @@ function runDemo(wrap){
   /* --- showdown --- */
   at(t, () => { clearGlow(); say("<b>Showdown</b>"); });
   t += 700;
-  ids.filter(id => !seats[id].classList.contains("fold")).forEach(id => {
+  /* who is still in comes from the hand itself — reading the seats here would
+     read the classes of whatever hand ran last, which is a hand too early */
+  const mucked = new Set();
+  H.streets.forEach(st => st.acts.forEach(([id, act]) => { if(act === "folds") mucked.add(id); }));
+  ids.filter(id => !mucked.has(id)).forEach(id => {
     at(t, () => {
       seats[id].querySelector(".hand").innerHTML =
         H.hole[id].map(c => cardHTML(c, "turn")).join("");
@@ -1769,6 +1931,11 @@ function runDemo(wrap){
     }
   });
   t += 2600;
+  /* the real hands get the last word */
+  if(H.note){
+    at(t, () => say(`<b>${H.note}</b>`, true));
+    t += 2600;
+  }
   at(t, () => {
     const pw = wrap.querySelector(".potwrap");
     if(pw){ pw.style.transition = "none"; pw.style.transform = ""; pw.style.opacity = ""; }
