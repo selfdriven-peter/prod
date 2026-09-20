@@ -174,8 +174,8 @@ async function pageTitles(env, code, key, pages) {
       const { status, html } = await fetchFromGitHub(
         base + "/" + code + "-" + key + "/" + pg + ".html", env.GH_TOKEN);
       if (status !== 200 || !html) return null;
-      const meta = html.match(/<meta\s+name=["']sd:title["']\s+content=["']([^"']+)["']/i);
-      if (meta) return meta[1].trim();
+      const meta = html.match(/<meta\s+name=["']sd:title["']\s+content=(["'])([\s\S]*?)\1/i);
+      if (meta) return meta[2].trim();
       const t = html.match(/<title>([^<]*)<\/title>/i);
       if (!t) return null;
       // drop a trailing " — moved" / " | Something" suffix noise

@@ -22,7 +22,7 @@ globalThis.fetch = async (url) => {
       { type: 'file', name: 'notes.txt' },
     ]), { status: 200 });
   if (url.endsWith('peter-8-ball.html'))
-    return new Response('<title>Magic 8 Ball</title>', { status: 200 });
+    return new Response('<meta name="sd:title" content="Russell\'s ball">', { status: 200 });
   if (url.endsWith('peter-welcome.html'))
     return new Response('<a href="peter-other.html">next</a><a href="https://x.com/a.html">ext</a>', { status: 200 });
   return new Response('not found', { status: 404 });
@@ -181,7 +181,7 @@ await t('an unknown who reads the same as a wrong password', async () => {
 
 await t('the listing uses each page\'s real title', async () => {
   const h = await (await post({ who: 'peter', password: CODE })).text();
-  eq(h.includes('Magic 8 Ball'), true, 'real title missing:');
+  eq(h.includes("Russell&#39;s ball"), true, 'apostrophe title truncated or missing:');
 });
 
 await t('a page with no title falls back to its filename', async () => {

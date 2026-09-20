@@ -8,15 +8,15 @@
       "order": 10
     },
     {
-      "id": "other",
-      "label": "Other",
-      "tone": "gold",
+      "id": "russ",
+      "label": "Russ \u00b7 selfdriven",
+      "tone": "caring",
       "order": 20
     },
     {
-      "id": "vault",
-      "label": "Vault",
-      "tone": "constructive",
+      "id": "poker",
+      "label": "Poker",
+      "tone": "gold",
       "order": 30
     }
   ],

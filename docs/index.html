@@ -60,8 +60,8 @@ button,input{font-family:inherit;color:inherit}
 
 /* ── masthead ───────────────────────────────────────────────────────── */
 .top{position:relative;z-index:1;display:flex;align-items:flex-end;justify-content:space-between;
-  gap:20px;padding:14px 4px 18px;flex:0 0 auto}
-.brand{display:flex;flex-direction:column;gap:8px;min-width:0}
+  gap:14px 20px;padding:14px 4px 18px;flex:0 0 auto;flex-wrap:wrap}
+.brand{display:flex;flex-direction:column;gap:8px;min-width:0;flex:1 1 300px}
 .markdots{display:inline-flex;gap:5px}
 .markdots i{width:9px;height:9px;border-radius:50%;display:block}
 .markdots i:nth-child(1){background:var(--curious)}
@@ -256,7 +256,8 @@ footer a:hover{color:var(--text)}
 }
 
 /* ── sign-in, in the top corner ──────────────────────────────────────────── */
-.top-right{display:flex;flex-direction:column;align-items:flex-end;gap:9px;flex:0 0 auto}
+.top-right{display:flex;flex-direction:column;align-items:flex-end;gap:9px;
+  flex:0 0 auto;margin-left:auto}
 .who{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
 /* the hidden attribute must beat the display rules below it */
 .who [hidden]{display:none !important}
@@ -284,10 +285,16 @@ footer a:hover{color:var(--text)}
 @media (prefers-reduced-motion:no-preference){
   .row{transition:opacity .25s ease,filter .25s ease}
 }
-@media (max-width:620px){
-  .top-right{align-items:flex-start;width:100%}
-  .who,.who-msg{align-items:flex-start;text-align:left}
-  .who input{width:8.4rem}
+@media (max-width:760px){
+  .top-right{flex-direction:row;align-items:center;justify-content:space-between;
+    width:100%;margin-left:0;gap:12px}
+  .top-right .tally{display:flex;align-items:baseline;gap:6px;text-align:left}
+  .top-right .tally b{font-size:20px}
+  .who{align-items:flex-end}
+}
+@media (max-width:430px){
+  .who input{width:6.8rem}
+  .who button{padding:6px 10px}
 }
 </style>
 </head>

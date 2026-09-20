@@ -35,12 +35,12 @@ CONFIG = os.path.join(ROOT, "catalogue.json")
 OUTPUT = os.path.join(ROOT, "docs", "data", "catalogue.js")
 
 META_RE = re.compile(
-    r"""<meta\s+name=["']sd:(?P<key>[a-z]+)["']\s+content=["'](?P<val>[^"']*)["']""",
+    r"""<meta\s+name=["']sd:(?P<key>[a-z]+)["']\s+content=(?P<q>["'])(?P<val>.*?)(?P=q)""",
     re.I,
 )
 TITLE_RE = re.compile(r"<title>(.*?)</title>", re.I | re.S)
 DESC_RE = re.compile(
-    r"""<meta\s+name=["']description["']\s+content=["']([^"']*)["']""", re.I
+    r"""<meta\s+name=["']description["']\s+content=(?P<dq>["'])(?P<dval>.*?)(?P=dq)""", re.I
 )
 
 
@@ -88,7 +88,7 @@ def parse_page(path, defaults):
     title_m = TITLE_RE.search(head)
     desc_m = DESC_RE.search(head)
     fallback_title = tidy_title(title_m.group(1)) if title_m else ""
-    fallback_line = first_sentence(desc_m.group(1)) if desc_m else ""
+    fallback_line = first_sentence(desc_m.group("dval")) if desc_m else ""
 
     stem = os.path.splitext(os.path.basename(path))[0]
 

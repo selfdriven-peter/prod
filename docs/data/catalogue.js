@@ -11,14 +11,14 @@ window.CATALOGUE = {
       "tone": "chill"
     },
     {
-      "id": "other",
-      "label": "Other",
-      "tone": "gold"
+      "id": "russ",
+      "label": "Russ · selfdriven",
+      "tone": "caring"
     },
     {
-      "id": "vault",
-      "label": "Vault",
-      "tone": "constructive"
+      "id": "poker",
+      "label": "Poker",
+      "tone": "gold"
     }
   ],
   "sites": [
@@ -36,8 +36,8 @@ window.CATALOGUE = {
       "owner": "peter"
     },
     {
-      "title": "Have a go",
-      "group": "selfdriven",
+      "title": "Russ, having a go",
+      "group": "russ",
       "tone": "caring",
       "icon": "ic-sparkles",
       "tag": "for Russ",
@@ -49,8 +49,8 @@ window.CATALOGUE = {
       "owner": "russ"
     },
     {
-      "title": "If I can change",
-      "group": "selfdriven",
+      "title": "Russell's change journey",
+      "group": "russ",
       "tone": "caring",
       "icon": "ic-sparkles",
       "tag": "by Russ",
@@ -63,7 +63,7 @@ window.CATALOGUE = {
     },
     {
       "title": "Poker Night",
-      "group": "other",
+      "group": "poker",
       "tone": "gold",
       "icon": "ic-spade",
       "tag": "soon",
@@ -73,19 +73,6 @@ window.CATALOGUE = {
       "locked": true,
       "page": "poker-night",
       "owner": "poker"
-    },
-    {
-      "title": "It works",
-      "group": "vault",
-      "tone": "constructive",
-      "icon": "ic-note",
-      "tag": "test page",
-      "line": "Proof the gate reaches the private vault.",
-      "cta": "Unlock",
-      "order": 10,
-      "locked": true,
-      "page": "peter-welcome",
-      "owner": "peter"
     }
   ]
 };
