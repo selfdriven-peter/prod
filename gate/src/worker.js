@@ -154,18 +154,45 @@ async function listProject(env, code, key) {
     .sort();
 }
 
-/** "russ-have-a-go" → "Have a go" — a label without opening the file. */
+/** Fallback label when a page has no usable <title>: "russ-have-a-go" → "Have a go". */
 function pageLabel(page, key) {
   const bare = page.startsWith(key + "-") ? page.slice(key.length + 1) : page;
-  const words = bare.replace(/[-_]+/g, " ").trim();
+  const words = (bare || page).replace(/[-_]+/g, " ").trim();
   return words ? words.charAt(0).toUpperCase() + words.slice(1) : page;
 }
 
-function projectHTML(key, pages, gateUrl, title) {
+/**
+ * The real titles, read from the pages themselves — "Poker Night — 19 Sep 2026"
+ * rather than a guess made from the filename. Capped, fetched in parallel, and
+ * any page that fails simply falls back to its filename label.
+ */
+async function pageTitles(env, code, key, pages) {
+  const base = (env.REPO_BASE || "").replace(/\/$/, "");
+  const capped = pages.slice(0, 25);
+  const titles = await Promise.all(capped.map(async (pg) => {
+    try {
+      const { status, html } = await fetchFromGitHub(
+        base + "/" + code + "-" + key + "/" + pg + ".html", env.GH_TOKEN);
+      if (status !== 200 || !html) return null;
+      const meta = html.match(/<meta\s+name=["']sd:title["']\s+content=["']([^"']+)["']/i);
+      if (meta) return meta[1].trim();
+      const t = html.match(/<title>([^<]*)<\/title>/i);
+      if (!t) return null;
+      // drop a trailing " — moved" / " | Something" suffix noise
+      return t[1].replace(/\s+/g, " ").trim() || null;
+    } catch { return null; }
+  }));
+  const out = {};
+  capped.forEach((pg, i) => { out[pg] = titles[i] || pageLabel(pg, key); });
+  pages.slice(25).forEach((pg) => { out[pg] = pageLabel(pg, key); });
+  return out;
+}
+
+function projectHTML(key, pages, gateUrl, title, labels) {
   const name = key.charAt(0).toUpperCase() + key.slice(1);
   const rows = pages.length
     ? pages.map((pg) => `<a class="p-row" href="${escapeHTML(gateUrl)}/#${escapeHTML(pg)}">
-         <span class="p-name">${escapeHTML(pageLabel(pg, key))}</span>
+         <span class="p-name">${escapeHTML((labels && labels[pg]) || pageLabel(pg, key))}</span>
          <span class="p-slug">${escapeHTML(pg)}</span>
          <span class="p-go">Open →</span></a>`).join("")
     : `<p class="lede">Nothing here yet.</p>`;
@@ -551,7 +578,8 @@ export default {
       }
       const pages = await listProject(env, project.code, key);
       if (!pages) return respondJSON(502, { error: "Could not retrieve pages. Try again." });
-      return respond(200, projectHTML(key, pages, gateUrl, env.GATE_TITLE));
+      const labels = await pageTitles(env, project.code, key, pages);
+      return respond(200, projectHTML(key, pages, gateUrl, env.GATE_TITLE, labels));
     }
 
     const page = sanitisePage(body && body.page);

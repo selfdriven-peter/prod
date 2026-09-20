@@ -21,6 +21,8 @@ globalThis.fetch = async (url) => {
       { type: 'dir',  name: 'nested' },
       { type: 'file', name: 'notes.txt' },
     ]), { status: 200 });
+  if (url.endsWith('peter-8-ball.html'))
+    return new Response('<title>Magic 8 Ball</title>', { status: 200 });
   if (url.endsWith('peter-welcome.html'))
     return new Response('<a href="peter-other.html">next</a><a href="https://x.com/a.html">ext</a>', { status: 200 });
   return new Response('not found', { status: 404 });
@@ -174,6 +176,18 @@ await t('an unknown who reads the same as a wrong password', async () => {
   const r = await post({ who: 'nobody', password: CODE });
   eq(r.status, 403);
   eq((await r.json()).error, 'Unknown page. Check the name you were given.');
+});
+
+
+await t('the listing uses each page\'s real title', async () => {
+  const h = await (await post({ who: 'peter', password: CODE })).text();
+  eq(h.includes('Magic 8 Ball'), true, 'real title missing:');
+});
+
+await t('a page with no title falls back to its filename', async () => {
+  const h = await (await post({ who: 'peter', password: CODE })).text();
+  // peter-welcome.html has no <title> in the stub
+  eq(h.includes('Welcome'), true, 'fallback label missing:');
 });
 
 console.log('\n' + pass + ' passed, ' + fail + ' failed\n');
