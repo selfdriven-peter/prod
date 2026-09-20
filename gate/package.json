@@ -10,7 +10,7 @@
     "test": "node test/gate.test.mjs"
   },
   "devDependencies": {
-    "wrangler": "^3.90.0"
+    "wrangler": "^4.135.0"
   },
   "type": "module"
 }
