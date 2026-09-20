@@ -254,6 +254,31 @@ footer a:hover{color:var(--text)}
     transition-duration:.01ms!important}
   .row:hover{transform:none}
 }
+
+/* ── the sign-in strip, and what it does to rows ─────────────────────────── */
+.who{margin:0 0 14px;padding:11px 14px;border:1px solid var(--line,#2a2a32);border-radius:12px;
+  background:rgba(255,255,255,.02)}
+.who-out,.who-in{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.who-lock svg{width:13px;height:13px;opacity:.6}
+.who-copy{font-size:.82rem;opacity:.75;flex:1 1 220px}
+.who-form{display:flex;gap:7px}
+.who input{background:rgba(0,0,0,.28);border:1px solid var(--line,#2a2a32);border-radius:8px;
+  padding:7px 11px;color:inherit;font:inherit;font-size:.82rem;width:9.5rem}
+.who input:focus{outline:2px solid var(--accent,#c9a227);outline-offset:1px}
+.who button{background:var(--accent,#c9a227);color:#12121a;border:0;border-radius:8px;
+  padding:7px 14px;font:inherit;font-size:.8rem;font-weight:600;cursor:pointer}
+.who button:disabled{opacity:.5;cursor:default}
+.who-in button{background:transparent;color:inherit;border:1px solid var(--line,#2a2a32);font-weight:400}
+.who-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;flex:none}
+.who-msg{margin:7px 0 0;font-size:.78rem;color:#f87171;min-height:0}
+.who-msg:empty{display:none}
+
+/* a locked row that is not yours: visible, but plainly not for you */
+.row.is-notyours{opacity:.32;filter:grayscale(1);cursor:default;pointer-events:none}
+.row.is-notyours .r-go{visibility:hidden}
+@media (prefers-reduced-motion:no-preference){
+  .row{transition:opacity .25s ease,filter .25s ease}
+}
 </style>
 </head>
 <body>
@@ -280,6 +305,24 @@ footer a:hover{color:var(--text)}
       <input id="find" type="search" placeholder="Filter…" aria-label="Filter pages by name" autocomplete="off">
     </label>
   </nav>
+
+  <div class="who" id="who">
+    <div class="who-out" id="whoOut">
+      <span class="who-lock"><svg aria-hidden="true"><use href="#ic-lock"/></svg></span>
+      <span class="who-copy">Got a password? Sign in and your pages light up.</span>
+      <form class="who-form" id="whoForm" autocomplete="off">
+        <input id="whoPw" type="password" placeholder="Your password" aria-label="Your password"
+               autocomplete="current-password" spellcheck="false">
+        <button type="submit" id="whoBtn">Sign in</button>
+      </form>
+    </div>
+    <div class="who-in" id="whoIn" hidden>
+      <span class="who-dot" aria-hidden="true"></span>
+      <span class="who-copy">Signed in as <b id="whoName">—</b>. The rest are dimmed.</span>
+      <button type="button" id="whoOutBtn">Sign out</button>
+    </div>
+    <p class="who-msg" id="whoMsg" role="status" aria-live="polite"></p>
+  </div>
 
   <main class="board" id="board" role="tabpanel" aria-live="polite">
     <div class="spot" aria-hidden="true"></div>
@@ -392,11 +435,72 @@ var SITES  = CATALOGUE ? (CATALOGUE.sites  || []) : [];
     boardEl.scrollTop = 0;
   }
 
+  /* ── who is looking ────────────────────────────────────────────────────
+     The index cannot read the password the gate remembers — different origin.
+     So it asks the gate "which project does this password open?" and keeps
+     only the answer ("peter"). Purely cosmetic: it decides what is dimmed,
+     never what can be opened. Every page still goes through the real check.
+     ──────────────────────────────────────────────────────────────────── */
+  var WHO_KEY = 'pp_who';
+  var who = null;
+  try { who = localStorage.getItem(WHO_KEY) || null; } catch(e){}
+
+  var whoOut  = document.getElementById('whoOut'),
+      whoIn   = document.getElementById('whoIn'),
+      whoForm = document.getElementById('whoForm'),
+      whoPw   = document.getElementById('whoPw'),
+      whoBtn  = document.getElementById('whoBtn'),
+      whoName = document.getElementById('whoName'),
+      whoMsg  = document.getElementById('whoMsg'),
+      whoOutB = document.getElementById('whoOutBtn');
+
+  function paintWho(){
+    var on = !!who;
+    whoOut.hidden = on; whoIn.hidden = !on;
+    if(on) whoName.textContent = who;
+  }
+
+  whoForm.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var pw = whoPw.value;
+    if(!pw || !GATE) return;
+    whoBtn.disabled = true; whoBtn.textContent = 'Checking…'; whoMsg.textContent = '';
+    try{
+      var res = await fetch(GATE + '/whoami', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ password: pw })
+      });
+      var data = {}; try { data = await res.json(); } catch(e){}
+      if(res.ok && data.key){
+        who = data.key;
+        try { localStorage.setItem(WHO_KEY, who); } catch(e){}
+        whoPw.value = '';
+        paintWho(); render();
+      } else {
+        whoMsg.textContent = data.error || 'That password was not recognised.';
+      }
+    } catch(err){
+      whoMsg.textContent = 'Could not reach the gate. Try again.';
+    }
+    whoBtn.disabled = false; whoBtn.textContent = 'Sign in';
+  });
+
+  whoOutB.addEventListener('click', function(){
+    who = null;
+    try { localStorage.removeItem(WHO_KEY); } catch(e){}
+    whoMsg.textContent = ''; paintWho(); render();
+  });
+
   /* ── the board ─────────────────────────────────────────────────────── */
   function rowHTML(s, i, n){
     var href = s.locked ? (GATE + '/#' + esc(s.page)) : esc(s.href);
+    /* signed in, and this locked page belongs to someone else */
+    var notYours = s.locked && who && s.owner && s.owner !== who;
     return '<a class="row t-' + s.tone + (s.locked ? ' is-locked' : '')
-      + '" href="' + href + '"' + (s.locked ? ' rel="nofollow"' : '')
+      + (notYours ? ' is-notyours' : '')
+      + '" href="' + (notYours ? '#' : href) + '"'
+      + (notYours ? ' aria-disabled="true" tabindex="-1"' : '')
+      + (s.locked ? ' rel="nofollow"' : '')
       + ' style="--i:' + i + '">'
       + '<span class="r-num">' + (n < 10 ? '0' : '') + n + '</span>'
       + '<span class="r-icon"><svg aria-hidden="true"><use href="#' + esc(s.icon) + '"/></svg>'
@@ -406,7 +510,7 @@ var SITES  = CATALOGUE ? (CATALOGUE.sites  || []) : [];
         + '<span class="r-title" data-text="' + esc(s.title) + '">' + esc(s.title) + '</span>'
         + '<span class="r-line">' + esc(s.line) + '</span>'
       + '</span>'
-      + '<span class="r-tag">' + esc(s.locked ? 'locked' : s.tag) + '</span>'
+      + '<span class="r-tag">' + esc(s.locked ? (notYours ? 'not yours' : 'locked') : s.tag) + '</span>'
       + '<span class="r-go"><span class="lbl">' + esc(s.locked ? (s.cta || 'Unlock') : s.cta) + '</span>'
         + '<svg aria-hidden="true"><use href="#ic-arrow-right"/></svg></span>'
       + '</a>';
@@ -504,7 +608,7 @@ var SITES  = CATALOGUE ? (CATALOGUE.sites  || []) : [];
   function wave(){ dots.classList.remove('wave'); void dots.offsetWidth; dots.classList.add('wave'); }
   dots.addEventListener('mouseenter', wave);
 
-  buildTabs(); render();
+  paintWho(); buildTabs(); render();
   requestAnimationFrame(moveGlider);
   window.addEventListener('resize', moveGlider);
   window.addEventListener('load', function(){ moveGlider(); wave(); });

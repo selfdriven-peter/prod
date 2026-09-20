@@ -7,6 +7,7 @@ const env = {
   REPO_BASE: 'https://api.github.com/repos/selfdriven-peter/lab/contents/docs/pages',
   GATE_TITLE: 'Pete | Secure pages',
   GATE_URL: 'https://gate.example',
+  INDEX_ORIGIN: 'https://index.example',
 };
 
 // stub GitHub so we can assert the URL the gate builds
@@ -96,6 +97,44 @@ await t('unconfigured gate fails closed', async () => {
   const r = await worker.fetch(
     new Request('https://gate.example/', { method: 'POST', body: '{}' }), { ...env, GH_TOKEN: '' });
   eq(r.status, 500);
+});
+
+
+/* ── /whoami, used by the public index to decide what to dim ─────────────── */
+const whoami = (body, origin = 'https://index.example', method = 'POST') => worker.fetch(
+  new Request('https://gate.example/whoami', {
+    method,
+    headers: { 'Content-Type': 'application/json', Origin: origin },
+    body: method === 'POST' ? JSON.stringify(body) : undefined,
+  }), env);
+
+await t('whoami names the project for a right password', async () => {
+  const r = await whoami({ password: CODE });
+  eq(r.status, 200);
+  eq((await r.json()).key, 'peter');
+  eq(r.headers.get('Access-Control-Allow-Origin'), 'https://index.example');
+});
+
+await t('whoami refuses a wrong password', async () => {
+  const r = await whoami({ password: 'nope' });
+  eq(r.status, 403);
+  eq((await r.json()).key, undefined);
+});
+
+await t('whoami refuses an origin that is not the index', async () => {
+  eq((await whoami({ password: CODE }, 'https://evil.example')).status, 403);
+});
+
+await t('whoami answers the CORS preflight', async () => {
+  const r = await whoami(null, 'https://index.example', 'OPTIONS');
+  eq(r.status, 204);
+  eq(r.headers.get('Access-Control-Allow-Methods'), 'POST, OPTIONS');
+});
+
+await t('whoami never leaks the code or the page list', async () => {
+  const body = await (await whoami({ password: CODE })).text();
+  eq(body.includes(CODE), false, 'code leaked:');
+  eq(body.includes('welcome'), false, 'page name leaked:');
 });
 
 console.log('\n' + pass + ' passed, ' + fail + ' failed\n');

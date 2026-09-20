@@ -17,3 +17,6 @@ GATE_TITLE = "Pete | Secure pages"
 # The public origin of this Worker. Used to rewrite links between vault pages.
 # Start with the workers.dev URL; swap it for a custom domain later if you want.
 GATE_URL   = "https://pages-gate.selfdriven-peter.workers.dev"
+
+# Origins allowed to call /whoami (the public index). Comma-separated.
+INDEX_ORIGIN = "https://selfdriven-peter.github.io"

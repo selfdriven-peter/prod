@@ -280,6 +280,37 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--chill-bright);o
 </html>`;
 }
 
+
+/* ── who-am-I, for the public index ───────────────────────────────────────────
+ * The index lives on a different origin, so it cannot read the password this
+ * Worker remembers. It POSTs a password here and gets back only the project
+ * key ("peter"), which it uses to un-fade that person's rows. No codes, no
+ * page names and no token ever cross the boundary — and the key is cosmetic,
+ * since every real page fetch still goes through the password check below.
+ */
+function corsHeaders(request, env) {
+  const allowed = (env.INDEX_ORIGIN || "").split(",").map((o) => o.trim()).filter(Boolean);
+  const origin = request.headers.get("Origin") || "";
+  if (!allowed.includes(origin)) return null;
+  return {
+    "Access-Control-Allow-Origin": origin,
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Max-Age": "86400",
+    "Vary": "Origin",
+  };
+}
+
+/** Which project does this password belong to? null if none. */
+function whichProject(password, projects) {
+  if (typeof password !== "string" || !password) return null;
+  for (const key of Object.keys(projects)) {
+    const list = projects[key] && projects[key].passwords;
+    if (Array.isArray(list) && list.some((p) => safeEqual(p, password))) return key;
+  }
+  return null;
+}
+
 /* ── handler ──────────────────────────────────────────────────────────────── */
 
 export default {
@@ -289,6 +320,32 @@ export default {
 
     if (url.pathname === "/robots.txt") {
       return respond(200, "User-agent: *\nDisallow: /\n", "text/plain; charset=utf-8");
+    }
+
+    // ── /whoami → tell the public index which project a password opens ──────
+    if (url.pathname === "/whoami") {
+      const cors = corsHeaders(request, env);
+      if (!cors) return respondJSON(403, { error: "Not allowed." });
+      if (request.method === "OPTIONS") {
+        return new Response(null, { status: 204, headers: { ...SECURITY_HEADERS, ...cors } });
+      }
+      if (request.method !== "POST") {
+        return new Response(JSON.stringify({ error: "POST only." }), {
+          status: 405,
+          headers: { "Content-Type": "application/json; charset=utf-8", ...SECURITY_HEADERS, ...cors },
+        });
+      }
+      if (!env.PROJECTS) return respondJSON(500, { error: "Gate is not configured." });
+      let who = null;
+      try {
+        const b = await request.json();
+        who = whichProject(b && b.password, loadProjects(env));
+      } catch { /* fall through to the refusal */ }
+      if (!who) await sleep(FAIL_DELAY_MS);
+      return new Response(JSON.stringify(who ? { key: who } : { error: "That password was not recognised." }), {
+        status: who ? 200 : 403,
+        headers: { "Content-Type": "application/json; charset=utf-8", ...SECURITY_HEADERS, ...cors },
+      });
     }
 
     // ── GET → the gate ──────────────────────────────────────────────────────
