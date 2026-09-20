@@ -154,65 +154,90 @@ seeing it proves the whole chain is connected.
 
 ## Adding pages from now on
 
-### A public page — anyone can read it
+The list on the index page is **generated**. You never edit `index.html` again.
+Each page says what it is in its own `<head>`, and a script collects them:
 
-1. Put the HTML file in `prod/docs/pages/`.
-2. Open `prod/docs/index.html`, scroll to the `SITES` list near the bottom, and
-   add an entry:
-
-```js
-{
-  group:'other', tone:'gold', icon:'ic-page',
-  title:'My New Thing', tag:'Oct 2026',
-  line:'One line about what it is.',
-  cta:'Have a look', href:'pages/my-new-thing.html'
-}
+```html
+<!-- catalogue -->
+<meta name="sd:title" content="Poker Night">
+<meta name="sd:group" content="other">
+<meta name="sd:tone"  content="gold">
+<meta name="sd:icon"  content="ic-spade">
+<meta name="sd:tag"   content="soon">
+<meta name="sd:line"  content="The where, the when, the buy-in and the house rules.">
+<meta name="sd:cta"   content="Deal me in">
+<meta name="sd:order" content="10">
+<!-- /catalogue -->
 ```
 
-3. Commit and push. Done — the tab counts, numbering and colours all sort
-   themselves out.
-
-### A private page — password required
-
-1. Put the HTML file in `lab/docs/pages/<CODE>-peter/` and name it
-   `peter-something.html`. **The `peter-` prefix is what makes it work** — the
-   gate uses it to find the folder.
-2. Commit and push the `lab` repo.
-3. Add an entry to `SITES` in `prod/docs/index.html` — note there's no `href`,
-   just `locked` and `page`:
-
-```js
-{
-  group:'vault', tone:'constructive', icon:'ic-note', locked:true,
-  title:'My Private Thing', page:'peter-something',
-  line:'Password protected — opens through the gate.',
-  cta:'Unlock'
-}
-```
-
-4. Commit and push `prod`. The row shows a padlock and a dashed outline, and
-   the **Vault** tab appears on the index automatically.
-
-There's a commented-out example of exactly this at the bottom of the `SITES`
-list — uncomment it once you've deployed and it'll light up.
-
-You don't need to redeploy the gate when you add a page. It reads the vault
-live. You only redeploy if you change the gate's own code or settings.
-
-### A second person with their own password
-
-Say you want to give someone a separate set of pages with a different password.
-Make a new folder `lab/docs/pages/<new-code>-sam/`, name the files
-`sam-whatever.html`, then update the `PROJECTS` secret to include them:
+### The easy way
 
 ```
-{"peter":{"code":"<CODE>","passwords":["<CODE>"]},"sam":{"code":"<new-code>","passwords":["<new-code>"]}}
+/publish-page
 ```
 
-Run `npx wrangler secret put PROJECTS` again with the new version. Sam's
-password won't open your pages and yours won't open theirs.
+The skill asks what the page is and whether it's public or private, writes it
+from the house template, rebuilds the catalogue, shows you the result, and
+offers to push. That's the whole job.
 
----
+### The manual way
+
+**A public page** — anyone can read it:
+
+1. Copy `templates/page.html` to `docs/pages/my-thing.html` and write it.
+2. Fill in the `sd:` tags at the top.
+3. `python3 tools/catalogue.py`
+4. Commit and push `prod`.
+
+**A private page** — password required:
+
+1. Copy the template to `lab/docs/pages/<CODE>-peter/peter-my-thing.html`.
+   The `peter-` prefix is what makes the gate find it.
+2. Fill in the `sd:` tags, with `sd:group` set to `vault`.
+3. `python3 tools/catalogue.py`
+4. Commit and push **both** repos — `lab` for the page, `prod` for the
+   catalogue entry that lists it.
+
+You never redeploy the gate to add a page. It reads the vault live.
+
+### The script
+
+```bash
+python3 tools/catalogue.py            # rebuild the catalogue
+python3 tools/catalogue.py --list     # show everything, grouped
+python3 tools/catalogue.py --check    # is it up to date? (for CI)
+```
+
+It warns you about the mistakes that are easy to make: a page with no group, a
+vault file missing its prefix, a group that doesn't exist, or — the one that
+matters — a page in the **public** repo claiming to be in the vault.
+
+### Do I need a folder per page?
+
+No. **One folder is one password, holding as many pages as you like.**
+
+```
+lab/docs/pages/<CODE>-peter/     ← one folder, one password
+    peter-welcome.html
+    peter-plan.html
+    peter-anything-else.html     ← just keep adding files
+```
+
+You only add a second folder when you want a **different password for a
+different person**:
+
+```
+lab/docs/pages/<other-code>-russ/
+    russ-something.html          ← Russ's password, not yours
+```
+
+Then update the `PROJECTS` secret to list both (see the skill, or
+`gate/README.md`).
+
+### A new group / tab
+
+Add it to `catalogue.json` and rebuild. The tab appears on the index
+automatically, and stays hidden until something is in it.
 
 ## What it costs
 
@@ -253,18 +278,29 @@ of the gate, and even that's free if the domain's DNS is on Cloudflare.
 ```
 prod/                                  PUBLIC
 ├── README.md                          this file
+├── catalogue.json                     groups, paths, gate URL  ← edit
+├── tools/catalogue.py                 builds the catalogue
+├── templates/page.html                starter for every new page
+├── .claude/skills/publish-page/       the /publish-page skill
 ├── docs/                              the website (GitHub Pages serves this)
-│   ├── index.html                     the index — edit SITES at the bottom
-│   ├── assets/
-│   └── pages/                         public pages
-└── gate/                              the password gate's source code
+│   ├── index.html                     the board — generated list, don't edit
+│   ├── data/catalogue.js              GENERATED, never hand-edit
+│   ├── pages/*.html                   public pages, flat, permanent URLs
+│   └── assets/
+└── gate/                              the Cloudflare Worker
     ├── src/worker.js                  all the gate logic
-    ├── wrangler.toml                  settings — no secrets
-    ├── .dev.vars.example              template for testing locally
-    └── README.md                      technical notes
+    ├── test/gate.test.mjs             11 checks — npm test
+    └── wrangler.toml                  settings, no secrets
 
 lab/                                   PRIVATE
 └── docs/pages/
-    └── <CODE>-peter/                the vault
-        └── peter-welcome.html         the test page
+    ├── README.md                      the conventions (and the real code)
+    └── <CODE>-peter/                  the vault — one folder, one password
+        └── peter-*.html
 ```
+
+**Why pages stay flat and are never renamed.** The whole point of the site is
+that a link you sent someone two years ago still works. Filing pages into
+folders by group would break every existing link, and would break them again
+every time you re-tagged a page. The group lives in the page's metadata, so you
+can move a page between tabs freely and its URL never changes.
