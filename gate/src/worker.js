@@ -124,6 +124,93 @@ async function fetchFromGitHub(url, token) {
   return { status: 200, html: await res.text() };
 }
 
+
+/* ── one link per person ──────────────────────────────────────────────────────
+ * /?who=russ shows a password-only gate. On success the Worker lists that
+ * project's folder in the vault and renders the pages as links. The folder
+ * name contains the code, so the listing is only ever built after the
+ * password has been checked, and the code itself never reaches the browser.
+ */
+async function listProject(env, code, key) {
+  const base = (env.REPO_BASE || "").replace(/\/$/, "");
+  const res = await fetch(base + "/" + code + "-" + key, {
+    headers: {
+      Authorization: "Bearer " + env.GH_TOKEN,
+      Accept: "application/vnd.github+json",
+      "X-GitHub-Api-Version": "2022-11-28",
+      "User-Agent": "pages-gate",
+    },
+  });
+  if (!res.ok) {
+    console.error("GitHub listing error " + res.status);
+    return null;
+  }
+  const items = await res.json().catch(() => null);
+  if (!Array.isArray(items)) return null;
+  return items
+    .filter((f) => f && f.type === "file" && /\.html$/i.test(f.name))
+    .map((f) => f.name.replace(/\.html$/i, ""))
+    .filter((n) => /^[a-zA-Z0-9_-]+$/.test(n))
+    .sort();
+}
+
+/** "russ-have-a-go" → "Have a go" — a label without opening the file. */
+function pageLabel(page, key) {
+  const bare = page.startsWith(key + "-") ? page.slice(key.length + 1) : page;
+  const words = bare.replace(/[-_]+/g, " ").trim();
+  return words ? words.charAt(0).toUpperCase() + words.slice(1) : page;
+}
+
+function projectHTML(key, pages, gateUrl, title) {
+  const name = key.charAt(0).toUpperCase() + key.slice(1);
+  const rows = pages.length
+    ? pages.map((pg) => `<a class="p-row" href="${escapeHTML(gateUrl)}/#${escapeHTML(pg)}">
+         <span class="p-name">${escapeHTML(pageLabel(pg, key))}</span>
+         <span class="p-slug">${escapeHTML(pg)}</span>
+         <span class="p-go">Open →</span></a>`).join("")
+    : `<p class="lede">Nothing here yet.</p>`;
+  return `<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>${escapeHTML(name)} · ${escapeHTML(title || "Secure pages")}</title>
+<meta name="theme-color" content="#09090f">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#09090f;--surface:#111118;--border:rgba(255,255,255,.08);
+  --text:#f0eeff;--muted:#7e7a9a;--chill:#7b6cff}
+html,body{min-height:100%;background:var(--bg);color:var(--text)}
+body{font-family:'DM Sans',system-ui,sans-serif;line-height:1.6;display:grid;
+  place-items:start center;padding:8vh 20px 12vh}
+.wrap{width:100%;max-width:640px}
+h1{font-size:clamp(1.6rem,5vw,2.3rem);font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+h1 span{color:var(--chill)}
+.lede{color:var(--muted);font-size:.93rem;margin-bottom:26px}
+.p-row{display:flex;align-items:center;gap:14px;padding:15px 17px;margin-bottom:9px;
+  background:var(--surface);border:1px solid var(--border);border-radius:13px;
+  text-decoration:none;color:inherit;transition:border-color .18s,transform .18s}
+.p-row:hover{border-color:var(--chill);transform:translateX(3px)}
+.p-name{font-weight:600;flex:1 1 auto}
+.p-slug{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.72rem;color:var(--muted)}
+.p-go{font-size:.8rem;color:var(--chill);white-space:nowrap}
+.foot{margin-top:28px;font-size:.8rem;color:var(--muted)}
+.foot a{color:var(--muted)}
+@media (max-width:460px){.p-slug{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>${escapeHTML(name)}'s <span>pages.</span></h1>
+  <p class="lede">${pages.length} page${pages.length === 1 ? "" : "s"}. You're already signed in — these open straight away.</p>
+  ${rows}
+  <p class="foot"><a href="${escapeHTML(gateUrl)}/">Open a page by name instead</a></p>
+</div>
+</body>
+</html>`;
+}
+
 /* ── the gate page ────────────────────────────────────────────────────────── */
 
 function gateHTML(prefill, title) {

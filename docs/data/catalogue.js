@@ -71,8 +71,8 @@ window.CATALOGUE = {
       "cta": "Deal me in",
       "order": 10,
       "locked": true,
-      "page": "peter-poker-night",
-      "owner": "peter"
+      "page": "poker-night",
+      "owner": "poker"
     },
     {
       "title": "It works",

@@ -318,7 +318,8 @@ footer a:hover{color:var(--text)}
     </div>
     <div class="who-in" id="whoIn" hidden>
       <span class="who-dot" aria-hidden="true"></span>
-      <span class="who-copy">Signed in as <b id="whoName">—</b>. The rest are dimmed.</span>
+      <span class="who-copy">Signed in as <b id="whoName">—</b>. Anything else is dimmed.</span>
+      <button type="button" id="whoAddBtn">Add another</button>
       <button type="button" id="whoOutBtn">Sign out</button>
     </div>
     <p class="who-msg" id="whoMsg" role="status" aria-live="polite"></p>
@@ -442,8 +443,13 @@ var SITES  = CATALOGUE ? (CATALOGUE.sites  || []) : [];
      never what can be opened. Every page still goes through the real check.
      ──────────────────────────────────────────────────────────────────── */
   var WHO_KEY = 'pp_who';
-  var who = null;
-  try { who = localStorage.getItem(WHO_KEY) || null; } catch(e){}
+  var who = [];          /* every project key you have signed in to */
+  try {
+    var raw = localStorage.getItem(WHO_KEY);
+    if(raw) who = raw.charAt(0) === '[' ? (JSON.parse(raw) || []) : [raw];
+  } catch(e){ who = []; }
+  function saveWho(){ try { localStorage.setItem(WHO_KEY, JSON.stringify(who)); } catch(e){} }
+  function knows(k){ return who.indexOf(k) !== -1; }
 
   var whoOut  = document.getElementById('whoOut'),
       whoIn   = document.getElementById('whoIn'),
@@ -452,12 +458,19 @@ var SITES  = CATALOGUE ? (CATALOGUE.sites  || []) : [];
       whoBtn  = document.getElementById('whoBtn'),
       whoName = document.getElementById('whoName'),
       whoMsg  = document.getElementById('whoMsg'),
-      whoOutB = document.getElementById('whoOutBtn');
+      whoOutB = document.getElementById('whoOutBtn'),
+      whoAddB = document.getElementById('whoAddBtn');
+
+  /* "Add another" drops you back to the password box without losing the keys
+     you already hold — poker has its own password, so you can hold both. */
+  whoAddB.addEventListener('click', function(){
+    whoOut.hidden = false; whoMsg.textContent = ''; whoPw.focus();
+  });
 
   function paintWho(){
-    var on = !!who;
+    var on = who.length > 0;
     whoOut.hidden = on; whoIn.hidden = !on;
-    if(on) whoName.textContent = who;
+    if(on) whoName.textContent = who.join(' + ');
   }
 
   whoForm.addEventListener('submit', async function(e){
@@ -472,8 +485,8 @@ var SITES  = CATALOGUE ? (CATALOGUE.sites  || []) : [];
       });
       var data = {}; try { data = await res.json(); } catch(e){}
       if(res.ok && data.key){
-        who = data.key;
-        try { localStorage.setItem(WHO_KEY, who); } catch(e){}
+        if(!knows(data.key)) who.push(data.key);
+        saveWho();
         whoPw.value = '';
         paintWho(); render();
       } else {
@@ -486,7 +499,7 @@ var SITES  = CATALOGUE ? (CATALOGUE.sites  || []) : [];
   });
 
   whoOutB.addEventListener('click', function(){
-    who = null;
+    who = [];
     try { localStorage.removeItem(WHO_KEY); } catch(e){}
     whoMsg.textContent = ''; paintWho(); render();
   });
@@ -495,7 +508,7 @@ var SITES  = CATALOGUE ? (CATALOGUE.sites  || []) : [];
   function rowHTML(s, i, n){
     var href = s.locked ? (GATE + '/#' + esc(s.page)) : esc(s.href);
     /* signed in, and this locked page belongs to someone else */
-    var notYours = s.locked && who && s.owner && s.owner !== who;
+    var notYours = s.locked && who.length && s.owner && !knows(s.owner);
     return '<a class="row t-' + s.tone + (s.locked ? ' is-locked' : '')
       + (notYours ? ' is-notyours' : '')
       + '" href="' + (notYours ? '#' : href) + '"'
