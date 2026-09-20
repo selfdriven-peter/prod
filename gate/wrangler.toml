@@ -1,0 +1,19 @@
+# pages-gate — Cloudflare Worker password gate for the private vault repo.
+#
+# Nothing secret belongs in this file. It is committed to a PUBLIC repo.
+# The token and the password list are set with `wrangler secret put` (see README).
+
+name = "pages-gate"
+main = "src/worker.js"
+compatibility_date = "2026-09-01"
+
+[vars]
+# The vault repo, through the GitHub Contents API. Must be a PRIVATE repo.
+REPO_BASE  = "https://api.github.com/repos/selfdriven-peter/lab/contents/docs/pages"
+
+# Shown in the browser tab on the gate screen.
+GATE_TITLE = "Pete | Secure pages"
+
+# The public origin of this Worker. Used to rewrite links between vault pages.
+# Start with the workers.dev URL; swap it for a custom domain later if you want.
+GATE_URL   = "https://pages-gate.selfdriven-peter.workers.dev"

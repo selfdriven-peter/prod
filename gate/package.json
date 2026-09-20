@@ -1,0 +1,16 @@
+{
+  "name": "pages-gate",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Password gate for private pages, on Cloudflare Workers",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "test": "node test/gate.test.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^3.90.0"
+  },
+  "type": "module"
+}

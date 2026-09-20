@@ -1,0 +1,5 @@
+# Copy to .dev.vars for local testing with `npm run dev`.
+# .dev.vars is gitignored — never commit the real one.
+
+GH_TOKEN="github_pat_REPLACE_ME"
+PROJECTS='{"peter":{"code":"REPLACE_CODE","passwords":["REPLACE_CODE"]}}'
