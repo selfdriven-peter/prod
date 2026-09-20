@@ -211,6 +211,83 @@ h1 span{color:var(--chill)}
 </html>`;
 }
 
+
+/** A password-only gate for /?who=<key> — no page name to know or type. */
+function whoGateHTML(key, title) {
+  const k = escapeHTML(key);
+  const name = k.charAt(0).toUpperCase() + k.slice(1);
+  return `<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>${escapeHTML(title || "Secure pages")}</title>
+<meta name="theme-color" content="#09090f">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#09090f;--surface:#111118;--border:rgba(255,255,255,.08);
+  --text:#f0eeff;--muted:#7e7a9a;--chill:#7b6cff}
+html,body{height:100%;background:var(--bg);color:var(--text)}
+body{font-family:'DM Sans',system-ui,sans-serif;line-height:1.6;display:grid;place-items:center;padding:22px}
+.card{width:100%;max-width:400px;background:var(--surface);border:1px solid var(--border);
+  border-radius:22px;padding:38px 32px}
+h1{font-size:1.75rem;font-weight:800;letter-spacing:-.03em;line-height:1.15;margin-bottom:10px}
+h1 span{color:var(--chill)}
+.lede{color:var(--muted);font-size:.9rem;margin-bottom:24px}
+label{display:block;font-size:.75rem;color:var(--muted);margin-bottom:6px}
+input{width:100%;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:11px;
+  padding:12px 14px;color:var(--text);font:inherit}
+input:focus{outline:2px solid var(--chill);outline-offset:1px}
+button{width:100%;margin-top:16px;background:var(--chill);color:#0b0b12;border:0;border-radius:11px;
+  padding:12px;font:inherit;font-weight:700;cursor:pointer}
+button:disabled{opacity:.55;cursor:default}
+.msg{margin-top:14px;font-size:.83rem;color:#ff5f7e;min-height:1.2em}
+.foot{margin-top:20px;font-size:.78rem;color:var(--muted)}
+.foot a{color:var(--muted)}
+</style>
+</head>
+<body>
+<main class="card">
+  <h1>${name}'s <span>pages.</span></h1>
+  <p class="lede">Enter the password you were given. No page name needed.</p>
+  <form id="f" autocomplete="off">
+    <label for="pw">Password</label>
+    <input id="pw" type="password" placeholder="••••••••" autocomplete="current-password" required>
+    <button id="go" type="submit">Show me</button>
+  </form>
+  <p class="msg" id="msg" role="status" aria-live="polite"></p>
+  <p class="foot"><a href="/">Open a page by name instead</a></p>
+</main>
+<script>
+(function(){
+  var f=document.getElementById('f'),pw=document.getElementById('pw'),
+      go=document.getElementById('go'),msg=document.getElementById('msg'),KEY=${JSON.stringify(key)};
+  function skey(k){return 'pp_pw_'+k;}
+  async function show(v){
+    go.disabled=true;go.textContent='Checking…';msg.textContent='';
+    try{
+      var r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({who:KEY,password:v})});
+      if(r.ok){
+        try{localStorage.setItem(skey(KEY),v);}catch(e){}
+        var h=await r.text();document.open();document.write(h);document.close();return;
+      }
+      var e={};try{e=await r.json();}catch(x){}
+      msg.textContent=e.error||'That password was not recognised.';
+      try{localStorage.removeItem(skey(KEY));}catch(x){}
+    }catch(x){ msg.textContent='Network error. Try again.'; }
+    go.disabled=false;go.textContent='Show me';
+  }
+  f.addEventListener('submit',function(e){e.preventDefault();if(pw.value)show(pw.value);});
+  var saved=null;try{saved=localStorage.getItem(skey(KEY));}catch(e){}
+  if(saved){pw.value=saved;show(saved);}else{pw.focus();}
+})();
+</script>
+</body>
+</html>`;
+}
+
 /* ── the gate page ────────────────────────────────────────────────────────── */
 
 function gateHTML(prefill, title) {
@@ -437,6 +514,11 @@ export default {
 
     // ── GET → the gate ──────────────────────────────────────────────────────
     if (request.method !== "POST") {
+      // /?who=russ — one link per person, password only
+      const rawWho = (url.searchParams.get("who") || "").trim();
+      if (rawWho && /^[a-zA-Z0-9_]{1,40}$/.test(rawWho)) {
+        return respond(200, whoGateHTML(rawWho, env.GATE_TITLE));
+      }
       const prefill = sanitisePage(url.searchParams.get("page") || "") || "";
       return respond(200, gateHTML(prefill, env.GATE_TITLE));
     }
@@ -452,6 +534,24 @@ export default {
       body = await request.json();
     } catch {
       return respondJSON(400, { error: "Invalid request." });
+    }
+
+    // ── {who, password} → list that project's pages ────────────────────────
+    if (body && typeof body.who === "string" && body.who) {
+      const key = body.who.trim();
+      const projects = loadProjects(env);
+      const project = /^[a-zA-Z0-9_]{1,40}$/.test(key) ? projects[key] : null;
+      const ok = project && project.code && Array.isArray(project.passwords)
+        && project.passwords.some((pw) => safeEqual(pw, body.password));
+      if (!ok) {
+        await sleep(FAIL_DELAY_MS);
+        // identical wording to a bad page password, so this cannot be used to
+        // discover which project keys exist
+        return respondJSON(403, { error: "Unknown page. Check the name you were given." });
+      }
+      const pages = await listProject(env, project.code, key);
+      if (!pages) return respondJSON(502, { error: "Could not retrieve pages. Try again." });
+      return respond(200, projectHTML(key, pages, gateUrl, env.GATE_TITLE));
     }
 
     const page = sanitisePage(body && body.page);

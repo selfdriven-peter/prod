@@ -14,6 +14,13 @@ const env = {
 let lastUrl = null;
 globalThis.fetch = async (url) => {
   lastUrl = url;
+  if (url.endsWith(CODE + '-peter'))
+    return new Response(JSON.stringify([
+      { type: 'file', name: 'peter-welcome.html' },
+      { type: 'file', name: 'peter-8-ball.html' },
+      { type: 'dir',  name: 'nested' },
+      { type: 'file', name: 'notes.txt' },
+    ]), { status: 200 });
   if (url.endsWith('peter-welcome.html'))
     return new Response('<a href="peter-other.html">next</a><a href="https://x.com/a.html">ext</a>', { status: 200 });
   return new Response('not found', { status: 404 });
@@ -135,6 +142,38 @@ await t('whoami never leaks the code or the page list', async () => {
   const body = await (await whoami({ password: CODE })).text();
   eq(body.includes(CODE), false, 'code leaked:');
   eq(body.includes('welcome'), false, 'page name leaked:');
+});
+
+
+/* ── /?who=<key> — one link per person ───────────────────────────────────── */
+await t('?who= serves a password-only gate', async () => {
+  const r = await worker.fetch(new Request('https://gate.example/?who=peter'), env);
+  eq(r.status, 200);
+  const h = await r.text();
+  eq(h.includes("Peter's"), true, 'no name heading:');
+  eq(h.includes('id="page"'), false, 'page field should be gone:');
+});
+
+await t('who + right password lists only that project\'s html pages', async () => {
+  const r = await post({ who: 'peter', password: CODE });
+  eq(r.status, 200);
+  const h = await r.text();
+  eq(h.includes('peter-welcome'), true, 'missing page:');
+  eq(h.includes('notes.txt'), false, 'non-html listed:');
+  eq(h.includes('nested'), false, 'directory listed:');
+  eq(h.includes(CODE), false, 'code leaked into the listing:');
+});
+
+await t('who + wrong password is refused, wording unchanged', async () => {
+  const r = await post({ who: 'peter', password: 'nope' });
+  eq(r.status, 403);
+  eq((await r.json()).error, 'Unknown page. Check the name you were given.');
+});
+
+await t('an unknown who reads the same as a wrong password', async () => {
+  const r = await post({ who: 'nobody', password: CODE });
+  eq(r.status, 403);
+  eq((await r.json()).error, 'Unknown page. Check the name you were given.');
 });
 
 console.log('\n' + pass + ' passed, ' + fail + ' failed\n');
