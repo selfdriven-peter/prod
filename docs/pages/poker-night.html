@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0A0A0A">
-<title>Poker Night — 19 Sep 2026</title>
+<title>Poker Night — next one soon</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -792,9 +792,11 @@ ul.dots li b{color:var(--cream);font-weight:600}
    ========================================================================== */
 
 const EVENT = {
-  /* Kick-off: Saturday 19 September 2026, 5:00pm, Melbourne (AEST, UTC+10). */
-  iso:      "2026-09-19T17:00:00+10:00",
-  dayLabel: "Saturday 19 September 2026",
+  /* No date set for the next one. Put the kick-off back in `iso` and
+     `dayLabel` when there is one and the countdown starts itself up again;
+     until then the whole page just says soon. */
+  iso:      null,
+  dayLabel: "Soon",
   timeLabel:"5:00 PM",
   cardsAt:  "5-ish",
   venue:    "Address as per before",
@@ -1064,8 +1066,10 @@ function tableHTML(list, opts){
   </div>`;
 }
 
-const START = new Date(EVENT.iso).getTime();
+const DATED = !!EVENT.iso;
+const START = DATED ? new Date(EVENT.iso).getTime() : 0;
 function countdown(){
+  if(!DATED) return { tbc:true, done:false, d:0, h:0, m:0, s:0 };
   const ms = START - Date.now();
   if(ms <= 0) return { done:true, d:0, h:0, m:0, s:0 };
   const s = Math.floor(ms / 1000);
@@ -1084,10 +1088,10 @@ function tickerHTML(){
     p.flying ? " ✈ FLYING IN" : p.maybe ? " MAYBE" : p.host ? " HOST" : ""}</span>`;
 
   const items = [
-    fact("KICK-OFF", EVENT.dayLabel.toUpperCase()),
+    fact("NEXT GAME", DATED ? EVENT.dayLabel.toUpperCase() : "SOON"),
     fact("FROM", EVENT.timeLabel),
     fact("BUY-IN", money(MONEY.buyIn)),
-    fact("COUNTDOWN", c.done ? "GAME ON" : c.d + " DAYS", "warn"),
+    fact("COUNTDOWN", c.tbc ? "DATE TO COME" : c.done ? "GAME ON" : c.d + " DAYS", "warn"),
     `<span class="ticker-item sep">THE FIELD</span>`,
     ...PLAYERS.map(who),
     fact("SEATS", PLAYERS.length),
@@ -1123,11 +1127,11 @@ function nightTab(){
   <div class="hero">
     <div class="kick">${EVENT.season} · ${gameLabel()}</div>
     <h2>POKER NIGHT</h2>
-    <div class="sub">${EVENT.dayLabel} · from ${EVENT.timeLabel}</div>
+    <div class="sub">${DATED ? EVENT.dayLabel + " · from " + EVENT.timeLabel : "Next one soon · we'll pick a date in the chat"}</div>
   </div>
 
   ${tableHTML(PLAYERS, { demo:true, mid:`
-    <div class="lg">${EVENT.dayLabel.replace(" 2026","").toUpperCase()}</div>
+    <div class="lg">${DATED ? EVENT.dayLabel.replace(" 2026","").toUpperCase() : "SOON"}</div>
     <div class="sm">${esc(EVENT.venue)}</div>
     <div class="sm" style="margin-top:4px">from ${EVENT.cardsAt} · ${money(MONEY.buyIn)} in</div>
     <div class="pay-felt">
@@ -1307,7 +1311,7 @@ function gameTab(){
   <div class="hero slim" style="--img:var(--aces-wide);--pos:center 72%;--dim:.5">
     <div class="kick">Host controls</div>
     <h2>GAME NIGHT</h2>
-    <div class="sub">${EVENT.dayLabel.replace(" 2026","")} · run the night from here</div>
+    <div class="sub">${DATED ? EVENT.dayLabel.replace(" 2026","") : "Next one soon"} · run the night from here</div>
   </div>
 
   <div class="segs">
@@ -1349,7 +1353,7 @@ function boardTab(){
         : esc(leaders.map(p => p.name.split(" ")[0]).join(" and "))}</div>
       <div class="n">${leaders.length ? "on " + w[leaders[0].id] + " win" + (w[leaders[0].id] === 1 ? "" : "s") : "nobody yet"}</div></div>
     <div class="stat cream"><div class="k">Seats</div><div class="v">${PLAYERS.length}</div><div class="n">full table</div></div>
-    <div class="stat cream"><div class="k">Next game</div><div class="v" style="font-size:26px">19 SEP</div><div class="n">${gameLabel().toLowerCase()}</div></div>
+    <div class="stat cream"><div class="k">Next game</div><div class="v" style="font-size:26px">${DATED ? EVENT.dayLabel.replace(" 2026","").toUpperCase() : "SOON"}</div><div class="n">${gameLabel().toLowerCase()}</div></div>
   </div>
 
   <div class="panel">
@@ -1359,7 +1363,7 @@ function boardTab(){
     </div>
     ${total ? "" : `<div class="empty">
       <div class="big">NO CARDS DEALT YET</div>
-      <p>Nobody has won a night. That changes on ${EVENT.dayLabel.replace(" 2026","")}.</p>
+      <p>Nobody has won a night. That changes on the next one.</p>
     </div>`}
     <div class="panel-bd flush tscroll">
       <table class="lb">
@@ -1489,7 +1493,9 @@ function go(t){
 function paintNavCount(){
   const el = $("#navcount"); if(!el) return;
   const c = countdown();
-  el.innerHTML = '<span class="pip"></span>' + (c.done
+  el.innerHTML = '<span class="pip"></span>' + (c.tbc
+    ? "<b>date soon</b>"
+    : c.done
     ? "<b>tonight</b>"
     : `<b>${c.d}d ${String(c.h).padStart(2,"0")}h ${String(c.m).padStart(2,"0")}m</b> to go`);
 }
