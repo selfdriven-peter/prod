@@ -36,30 +36,17 @@ window.CATALOGUE = {
       "owner": "peter"
     },
     {
-      "title": "Russ, having a go",
-      "group": "russ",
-      "tone": "caring",
-      "icon": "ic-sparkles",
-      "tag": "for Russ",
-      "line": "Week one, a day at a time. Five syncs, four things a day, and the 4Cs.",
-      "cta": "Open week one",
+      "title": "Mike's image",
+      "group": "selfdriven",
+      "tone": "chill",
+      "icon": "ic-compass",
+      "tag": "for Mike",
+      "line": "A hand-drawn ink labyrinth, redrawn as a vector. Zoom in, compare, download.",
+      "cta": "Open it",
       "order": 20,
       "locked": true,
-      "page": "russ-have-a-go",
-      "owner": "russ"
-    },
-    {
-      "title": "Russell's change journey",
-      "group": "russ",
-      "tone": "caring",
-      "icon": "ic-sparkles",
-      "tag": "by Russ",
-      "line": "Four gears, a morning script, and a wall you build one brick a day.",
-      "cta": "Read it",
-      "order": 30,
-      "locked": true,
-      "page": "russ-if-i-can",
-      "owner": "russ"
+      "page": "peter-mike-image",
+      "owner": "peter"
     },
     {
       "title": "Poker Night",
