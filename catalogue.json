@@ -18,6 +18,12 @@
       "label": "Poker",
       "tone": "gold",
       "order": 30
+    },
+    {
+      "id": "outsiders",
+      "label": "Outsiders",
+      "tone": "constructive",
+      "order": 40
     }
   ],
   "public": {

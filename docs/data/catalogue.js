@@ -19,6 +19,11 @@ window.CATALOGUE = {
       "id": "poker",
       "label": "Poker",
       "tone": "gold"
+    },
+    {
+      "id": "outsiders",
+      "label": "Outsiders",
+      "tone": "constructive"
     }
   ],
   "sites": [
@@ -45,7 +50,7 @@ window.CATALOGUE = {
       "cta": "Open it",
       "order": 20,
       "locked": true,
-      "page": "peter-mike-image",
+      "page": "peter-image",
       "owner": "peter"
     },
     {
@@ -60,6 +65,19 @@ window.CATALOGUE = {
       "locked": true,
       "page": "poker-night",
       "owner": "poker"
+    },
+    {
+      "title": "Outsiders Back Court",
+      "group": "outsiders",
+      "tone": "constructive",
+      "icon": "ic-sparkles",
+      "tag": "for the Outsiders",
+      "line": "Five animated moves for a tight L4-5/S1, for the guys whose backs retired first.",
+      "cta": "Stretch first",
+      "order": 10,
+      "locked": true,
+      "page": "outsiders-back-court",
+      "owner": "outsiders"
     }
   ]
 };
