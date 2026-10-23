@@ -54,6 +54,45 @@ window.CATALOGUE = {
       "owner": "peter"
     },
     {
+      "title": "Low Back Support",
+      "group": "selfdriven",
+      "tone": "constructive",
+      "icon": "ic-sparkles",
+      "tag": "for a mate",
+      "line": "Animated floor moves, walking and swimming to take load off the back, knees and feet.",
+      "cta": "Start small",
+      "order": 30,
+      "locked": true,
+      "page": "peter-low-back-support",
+      "owner": "peter"
+    },
+    {
+      "title": "Giau's Next Chapter",
+      "group": "selfdriven",
+      "tone": "caring",
+      "icon": "ic-compass",
+      "tag": "for Giau",
+      "line": "Real Melbourne roles, a contracting launch plan and three small steps for this week.",
+      "cta": "Take a look",
+      "order": 40,
+      "locked": true,
+      "page": "peter-giau-future",
+      "owner": "peter"
+    },
+    {
+      "title": "TrialThread",
+      "group": "selfdriven",
+      "tone": "caring",
+      "icon": "ic-thread",
+      "tag": "clinical trials",
+      "line": "One verified thread from source to submission. AI observers check every record; a named human signs.",
+      "cta": "Follow the thread",
+      "order": 50,
+      "locked": true,
+      "page": "peter-trialthread",
+      "owner": "peter"
+    },
+    {
       "title": "Poker Night",
       "group": "poker",
       "tone": "gold",
