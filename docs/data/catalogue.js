@@ -137,13 +137,13 @@ window.CATALOGUE = {
       "owner": "outsiders"
     },
     {
-      "title": "Prominence Recruitment",
+      "title": "Prominence Guild",
       "group": "prominence",
       "tone": "gold",
       "icon": "ic-sparkles",
-      "tag": "WoW guild",
-      "line": "Copy-and-paste recruitment calls for the Prominence guild, sized for WoW chat.",
-      "cta": "Join the guild",
+      "tag": "WoW Forever",
+      "line": "The home of the Prominence guild: the council, who we're recruiting, raid nights and how to join.",
+      "cta": "Enter the hall",
       "order": 10,
       "locked": true,
       "page": "prominence-recruitment",
