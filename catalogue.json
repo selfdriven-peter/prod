@@ -24,6 +24,12 @@
       "label": "Outsiders",
       "tone": "constructive",
       "order": 40
+    },
+    {
+      "id": "prominence",
+      "label": "Prominence \u00b7 WoW",
+      "tone": "gold",
+      "order": 50
     }
   ],
   "public": {

@@ -24,6 +24,11 @@ window.CATALOGUE = {
       "id": "outsiders",
       "label": "Outsiders",
       "tone": "constructive"
+    },
+    {
+      "id": "prominence",
+      "label": "Prominence · WoW",
+      "tone": "gold"
     }
   ],
   "sites": [
@@ -93,6 +98,19 @@ window.CATALOGUE = {
       "owner": "peter"
     },
     {
+      "title": "Coachbuilt",
+      "group": "selfdriven",
+      "tone": "constructive",
+      "icon": "ic-sparkles",
+      "tag": "for Matt",
+      "line": "Fusion, reviewed. Then rebuilt as an AI car studio: say the car, see the car, ship the file.",
+      "cta": "Open the studio",
+      "order": 60,
+      "locked": true,
+      "page": "peter-coachbuilt",
+      "owner": "peter"
+    },
+    {
       "title": "Poker Night",
       "group": "poker",
       "tone": "gold",
@@ -117,6 +135,32 @@ window.CATALOGUE = {
       "locked": true,
       "page": "outsiders-back-court",
       "owner": "outsiders"
+    },
+    {
+      "title": "Prominence Recruitment",
+      "group": "prominence",
+      "tone": "gold",
+      "icon": "ic-sparkles",
+      "tag": "WoW guild",
+      "line": "Copy-and-paste recruitment calls for the Prominence guild, sized for WoW chat.",
+      "cta": "Join the guild",
+      "order": 10,
+      "locked": true,
+      "page": "prominence-recruitment",
+      "owner": "prominence"
+    },
+    {
+      "title": "TrialThread for Biotech Sponsors",
+      "group": "vault",
+      "tone": "constructive",
+      "icon": "ic-page",
+      "tag": "",
+      "line": "",
+      "cta": "Unlock",
+      "order": 50,
+      "locked": true,
+      "page": "peter-trialthread-amplia",
+      "owner": "peter"
     }
   ]
 };
