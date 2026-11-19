@@ -146,7 +146,7 @@ window.CATALOGUE = {
       "cta": "Enter the hall",
       "order": 10,
       "locked": true,
-      "page": "prominence-recruitment",
+      "page": "prominence-guild",
       "owner": "prominence"
     },
     {
